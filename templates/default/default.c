@@ -1,5 +1,5 @@
-// $ gcc test.c -o test `sdl2-config --libs --cflags` -lSDL2_gfx
-// $ ./test
+// $ gcc default.c -o default `sdl2-config --libs --cflags` -lSDL2_gfx
+// $ ./default
 
 #include "includes/sta.h"
 

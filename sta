@@ -8,3 +8,95 @@
 # - build: ?
 #   The main source file in the folder can be determined by the folder name (must be the same).
 # - run: ...
+
+# quick fix for adding colors to strings:
+
+class String
+  def red;     return "\e[31m#{self}\e[0m" end
+  def green;   return "\e[32m#{self}\e[0m" end
+  def blue;    return "\e[34m#{self}\e[0m" end
+  def gray;    return "\e[37m#{self}\e[0m" end
+end
+
+module Actions
+  
+  def self.build(*args)
+    check_folder!
+    gcc_cmd = "gcc #{source_file} -o #{executable_file}"
+    
+    gcc_opts_path = File.join(self.folder, "gcc.opts")
+    if File.file?(gcc_opts_path)
+      contents = File.read(gcc_opts_path)
+      evaluated = shell("echo \"#{contents}\"", true, "Could not evaluate 'gcc.opts'.") # this is not very secure, but a very easy way to evaluate the options in the shell
+      evaluated.gsub!("\n", " ")
+      evaluated.strip!
+      gcc_cmd += " #{evaluated}"
+    end
+    # puts "Running: #{gcc_cmd}".gray
+    shell(gcc_cmd, true, "Compilation failed:")
+    puts "Success!".green
+    puts "Now you can try 'sta run'.".blue
+  end
+
+  def self.run(*args)
+    check_folder!
+    abort("There is no executable yet. Please run 'sta build' first") unless File.exists?(executable_file)
+    Kernel.exec(executable_file) # Yes, really replace this process with a new one.
+  end
+  
+  def self.help(*args)
+    puts "sta <mode> [<option>] ..."
+    puts
+    puts "Supported modes are:"
+    puts "  help         Display this help."
+    puts "  build        Compile the program."
+    puts "  run          Run the program (needs build before)."
+  end
+  
+  protected # I know, there is no such thing as protected in class methods, but it is still a nice signal for the world:
+  # everything after this point is for this module only.
+
+  # Little helper which makes sure that the user is currently in a project folder
+  def self.check_folder!
+    # self.abort("You are not in a project folder (under '~/Documents/STA'). Please 'cd ~/Documents/STA/MYPROJECT'.") # TODO reenable this test and disable via config file
+    self.abort("Please make sure your main source file is called #{self.source_file}") unless File.exists?(self.source_file)
+  end
+
+  # helper for paths
+  def self.folder
+    return Dir.pwd
+  end
+  def self.source_file
+    return File.join(folder, File.basename(folder) + ".c")
+  end
+  def self.executable_file
+    return File.join(folder, File.basename(folder))
+  end
+
+  # Runs the given command in the shell.
+  # If the command returns a non-zero return code, the method aborts the program with the given error_message.
+  def self.shell(command, abort_on_error=true, error_message=nil)
+    result = `#{command} 2>&1`
+    if abort_on_error && !$?.success? # we have an error
+      message = "Error while running: #{command}"
+      message = error_message unless error_message.nil?
+      abort("#{message.red}\n#{result.blue}")
+    end
+    return result
+  end
+
+  # Helper method which shows the given message, shows the usage (if with_help=true) and then exits.
+  def self.abort(message, with_help=false)
+    puts message.red
+    self.help if with_help
+    exit 1
+  end
+end
+
+if __FILE__ == $0
+  # We are using a very simple (and insecure) way to parse the command line arguments.
+  # Usually, I would use a gem for it (e.g. Slop), but I want to keep the dependencies low.
+  action, *options = ARGV
+  Actions.abort("Please specify a valid action!", true) if action.nil? || !Actions.respond_to?(action)
+  Actions.send(action, *options)
+end
