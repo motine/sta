@@ -2,9 +2,9 @@
 
 **This is not ripe yet. I will add more documentation as soon as I get somewhere with this project.**
 
-The Simple Teaching Assistant helps in bringing programming to students.
-Since our students will become engineers, we chose `C` as a language.
-But there is an allure to projects like [Processing](https://processing.org/), which teach programming a little more visual.
+The Simple Teaching Assistant help to teach programming.
+Our students will become engineers, so we chose `C` as language.
+But there is an allure to projects like [Processing](https://processing.org/), which teach programming a little more visual – and a little less black matrix.
 
 The Simple Teaching Assistant takes the edge off of graphical programming by providing a ready-made environment.
 The `sta` tool lets the student easily create projects and compile them.
@@ -13,13 +13,14 @@ The default template offers a set of simple drawing functions and a `setup`/`dra
 It is based on [SDL 2](https://www.libsdl.org/).
 
 **Why write a wrapper around SDL?**
-First semester students typically don't know about double buffering or window handles.
-This thin wrapper removes the need for explaining such things, which would only keep the teacher from explaining the stuff that really counts.
+First semester students typically don't know about double buffering, window handles or texture rendering.
+The thin wrapper removes the need for explaining such things and gives the students simple drawing tools to solve (visual) problems.
+Hence, we, the teachers, can focus on explaining the stuff that really counts: problem solving.
 
 **Why an additional tool?**
-Well, since we are using a couple of libraries, the gcc command becomes quite heavy: e.g. `gcc test.c -o test $(sdl2-config --libs --cflags) -lSDL2_gfx`.
-This is cumbersome to type and adds a lot of room for error. The `sta` tool shall reduce errors during compiling.
-Also it prescribes a folder structure, which makes it easier for the students to keep their files tidy and allows the teacher to easily find files on _everyone's_ computer.
+Well, since we are using a couple of libraries, the gcc command becomes quite heavy: `gcc test.c -o test $(sdl2-config --libs --cflags) -lSDL2_gfx`.
+This line is cumbersome to type and adds a lot of room for error. The `sta` tool shall reduce errors during compiling.
+Also it prescribes a folder structure, which makes it easier for students to keep their files tidy and allows the teacher to easily find files on _everyone's_ computer.
 
 ## Installation
 
