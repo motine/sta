@@ -38,7 +38,7 @@ The assistant has now created a number of files in the STA folder. The most impo
 #include "includes/sta.h"
 
 void setup() {
-  // do initialization herre
+  // do initialization here
 }
 
 void draw() {
@@ -66,9 +66,9 @@ Now all left to do is to compile and run the program. Here the assistant helps a
 
 ```bash
 cd ~/Documents/STA/myprj # let's not forget that we have to go to the project first
-sta build
+sta build # runs gcc with all the -I and -l options and writes the executable to myprj
 # ... output of GCC ...
-sta run
+sta run # just calls ./myprj
 ```
 
 ## TODO
