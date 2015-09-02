@@ -16,7 +16,7 @@ It is based on [SDL 2](https://www.libsdl.org/).
 
 Lots to do here...
 
-* on mac: i installed `brew install sdl2 sdl2_gfx`
+<!-- * on mac: i installed `brew install sdl2 sdl2_gfx` -->
 
 <!-- I need gfx for drawing ellipses. -->
 <!-- for reference: open /usr/local/Cellar/sdl2_gfx/1.0.0/include/ -->
