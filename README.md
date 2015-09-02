@@ -56,7 +56,7 @@ void draw() {
 }
 ```
 
-Let's do something with the program and change the contents of the file to:
+Let's do something with the program and change the contents of the draw function to:
 
 ```c
 void draw() {
