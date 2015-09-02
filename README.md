@@ -7,10 +7,19 @@ Since our students will become engineers, we chose `C` as a language.
 But there is an allure to projects like [Processing](https://processing.org/), which teach programming a little more visual.
 
 The Simple Teaching Assistant takes the edge off of graphical programming by providing a ready-made environment.
-The `sta` tool lets the student easily create projects (in a prescribed folder structure) and compile them.
+The `sta` tool lets the student easily create projects and compile them.
 These (new) projects are derived from a template. 
 The default template offers a set of simple drawing functions and a `setup`/`draw` structure similar to [Processing's](https://processing.org/examples/loop.html).
 It is based on [SDL 2](https://www.libsdl.org/).
+
+**Why write a wrapper around SDL?**
+First semester students typically don't know about double buffering or window handles.
+This thin wrapper removes the need for explaining such things, which would only keep the teacher from explaining the stuff that really counts.
+
+**Why an additional tool?**
+Well, since we are using a couple of libraries, the gcc command becomes quite heavy: e.g. `gcc test.c -o test $(sdl2-config --libs --cflags) -lSDL2_gfx`.
+This is cumbersome to type and adds a lot of room for error. The `sta` tool shall reduce errors during compiling.
+Also it prescribes a folder structure, which makes it easier for the students to keep their files tidy and allows the teacher to easily find files on _everyone's_ computer.
 
 ## Installation
 
