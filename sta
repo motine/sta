@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# here goes the command line utility. It...
+
+# - keeps a number of templates under `~/.sta/templates/*`
+# - new: create a new folder with template inside. All projects are assumed under `~/Documents/STA/PROJECT_NAME/`
+# - update: download new templates and headers/c files from github
+# - build: ?
+#   The main source file in the folder can be determined by the folder name (must be the same).
+# - run: ...
