@@ -80,9 +80,43 @@ sta build # runs gcc with all the -I and -l options and writes the executable to
 sta run # just calls ./myprj
 ```
 
+## The default template
+
+TODO: Document the drawing API here.
+
+## Internals
+
+**Templates**
+The templates folder can contain multiple templates.
+If no other option is chosen, the `default` template will be used.
+When a new project is created all files & folders are copied to the (new) project folder.
+
+A template must have at least one file which is named after the template's name (with extension `.c`).
+This file will then be renamed from `TEMPLATE_NAME.c` to `PROJECT_NAME.c`.
+Optionally, there can be a `gcc.opts` file. This file is evaluated in the bash (yes it may contain shell substitutions) and added to arguments when running `gcc`.
+
+**Updates**
+The templates are kept under `~/.sta/templates/*`. If one calls `sta update` (while having internet), the latest version of templates is pulled from `http://github.com/motine/sta`.
+Updating existing projects is currently not supported.
+
+**Testing**
+While developing/testing the `sta` tool, I did not want to re-create new projects with `sta new` all the time.
+Hence, I use the following workflow: `cd templates/default; ../../sta build`
+
 ## TODO
 
-* vagrant: create ubuntu with desktop (folder shall include all C code)
-* Write tool `sta` (see notes there)
-* Write wrapper `sta.h` (see notes there)
+* vagrant: Create ubuntu with Desktop (folder shall include all C code)
+* Add installation manual
+* Add features to `sta`:
+  * `new`: create a new folder with template inside.
+    Rename `default.c` to `project_name.c`.
+    All projects are assumed under `~/Documents/STA/PROJECT_NAME/`.
+  * `update`: download the latest version of the sta script and download new templates and headers/c files from github.
+    Keep the templates under `~/.sta/templates/*`.
+* Add features to wrapper `drawing.h`
+  * set the color for stroke and fill
+  * draw ellipses, rects, lines (filled _and_ outlines, mind the previously set color)
+  * have a random() and millis() function
+  * have key and mouse handling (variables can be queried by the loop, e.g. `if (mousePressed) ...`
+  * add error checking everywhere
 

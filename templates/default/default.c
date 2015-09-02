@@ -1,7 +1,7 @@
 // $ gcc default.c -o default `sdl2-config --libs --cflags` -lSDL2_gfx
 // $ ./default
 
-#include "includes/sta.h"
+#include "includes/drawing.h"
 
 void setup() {
   background(50,50,50);

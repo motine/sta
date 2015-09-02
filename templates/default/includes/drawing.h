@@ -1,13 +1,5 @@
-// TODO
-// - set the color for stroke and fill
-// - draw ellipses, rects, lines (filled and outlines, mind the previously set color)
-// - have a random() and millis() function
-// - have key and mouse handling (variables can be queried by the loop, e.g. if (mousePressed) ...)
-
-// TODO add error checking everywhere
-
-#ifndef STA_H
-#define STA_H
+#ifndef DRAWING_H
+#define DRAWING_H
 
 // We need to be careful with double buffering:
 // Since we have "two" pictures, we flip the page/buffer for each drawing operation.
