@@ -4,11 +4,9 @@
 #include "includes/drawing.h"
 
 void setup() {
-  background(50,50,50);
+  // do initialization here
 }
 
 void draw() {
-  fill(100, frame_no % 255, frame_no % 255);
-  rectangle(frame_no*5, frame_no, frame_no, frame_no*10);
-  delay(40);
+  // this will be repeated on and on and on...
 }

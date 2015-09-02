@@ -26,7 +26,7 @@ Also it prescribes a folder structure, which makes it easier for students to kee
 
 **On Mac**, you can install the libraries via [homebrew](http://brew.sh/):  `brew install sdl2 sdl2_gfx`. Or do it manually: [sdl 2](https://www.libsdl.org/download-2.0.php) and [sdl2 gfx](http://cms.ferzkopp.net/index.php/software/13-sdl-gfx).
 
-**On Linux** (Ubuntu), I installed the following (Ubuntu) packages: `libsdl2 libsdl2-dev libsdl2-gfx-dev`.
+**On Linux** (Ubuntu), I installed the following packages: `libsdl2 libsdl2-dev libsdl2-gfx-dev`.
 
 <!-- I need gfx for drawing ellipses. -->
 <!-- for reference: open /usr/local/Cellar/sdl2_gfx/1.0.0/include/ -->
@@ -59,16 +59,8 @@ void draw() {
 Let's do something with the program and change the contents of the file to:
 
 ```c
-#include "includes/sta.h"
-
-void setup() {
-  background(50,50,50);
-}
-
 void draw() {
-  fill(100, frame_no % 255, frame_no % 255); // set the fill color
-  rectangle(frame_no*5, frame_no, frame_no, frame_no*10); // draw a rectangle (filled with stroke)
-  delay(40); // wait a bit, so we see the whole thing build up
+  rectangle(10, 10, 400, 300);
 }
 ```
 
@@ -84,6 +76,27 @@ sta run # just calls ./myprj
 ## The default template
 
 TODO: Document the drawing API here.
+
+### Examples
+
+#### Full setup and frame count
+
+```c
+#include "includes/sta.h"
+
+void setup() {
+  // remove background
+  background(0, 0, 0); 
+  // set colors
+  fill(100, 50, 50); 
+  stroke(200, 200, 255);
+}
+
+void draw() {
+  rectangle(frame_no*5 % 300, 10, 400, 300); // draw a rect
+  delay(100); // wait a bit, so we see the whole thing build up
+}
+```
 
 ## Internals
 
@@ -110,8 +123,6 @@ To start the minimalistic window manager please run `sudo startxfce4` in the GUI
 
 ## TODO
 
-* vagrant: Create ubuntu with Desktop (folder shall include all C code)
-* Add installation manual
 * Add features to `sta`:
   * `new`: create a new folder with template inside.
     Rename `default.c` to `project_name.c`.
@@ -122,7 +133,8 @@ To start the minimalistic window manager please run `sudo startxfce4` in the GUI
   * set the color for stroke and fill
   * draw ellipses, rects, lines (filled _and_ outlines, mind the previously set color)
   * have a random() and millis() function
+  * add text()
+  * use fill color for background()
   * have key and mouse handling (variables can be queried by the loop, e.g. `if (mousePressed) ...`
   * add error checking everywhere
   * Add API documentation to README
-

@@ -22,12 +22,59 @@ void draw();
 static SDL_Window* window;
 static SDL_Renderer* renderer;
 
+// Drawing functions
+
+// -- colors
+static Uint32 fill_color;
+static Uint32 stroke_color;
+
+Uint32 rgb(uint8_t r, uint8_t g, uint8_t b) {
+  // colors are #ARGB
+  Uint32 result = 0xFF << 24;
+  return result | b << 16 | g << 8 | r;
+}
+
+void fill(uint8_t r, uint8_t g, uint8_t b) {
+  fill_color = rgb(r,g,b);
+}
+void stroke(uint8_t r, uint8_t g, uint8_t b) {
+  stroke_color = rgb(r,g,b);
+}
+
+// -- actual drawing
+void background(uint8_t r, uint8_t g, uint8_t b) {
+  SDL_SetRenderDrawColor(renderer, r,g,b,0xFF);
+  for (uint8_t i=0; i<2; i++) {
+    SDL_RenderClear(renderer); // TODO this is a very ugly way to deal with the double buffering
+    if (i==0)
+      SDL_RenderPresent(renderer); // TODO read when you have internet and also change below
+  }
+}
+
+void rectangle(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2) {
+  for (uint8_t i=0; i<2; i++) {
+    boxColor(renderer, x1, y1, x2, y2, fill_color);
+    rectangleColor(renderer, x1, y1, x2, y2, stroke_color);
+    if (i==0)
+      SDL_RenderPresent(renderer);
+  }
+}
+
+// -- misc
+void delay(unsigned int ms) {
+  SDL_Delay(ms);
+}
+
+// Window and loop stuff
 static unsigned long frame_no = 0; // number of frames since the program started
 
 void init() {
   SDL_Init(SDL_INIT_VIDEO);
   window = SDL_CreateWindow("Your Program", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+  background(255, 255, 255);
+  fill(200, 200, 200);
+  stroke(100, 100, 100);
   setup();
 }
 
@@ -50,43 +97,6 @@ void run() {
   }
   SDL_DestroyWindow(window);
   SDL_Quit(); 
-}
-
-// colors
-static Uint32 fill_color;
-static Uint32 stroke_color;
-
-Uint32 rgb(uint8_t r, uint8_t g, uint8_t b) {
-  // colors are #ARGB
-  Uint32 result = 0xFF << 24;
-  return result | b << 16 | g << 8 | r;
-}
-
-void fill(uint8_t r, uint8_t g, uint8_t b) {
-  fill_color = rgb(r,g,b);
-}
-
-// drawing functions
-void background(uint8_t r, uint8_t g, uint8_t b) {
-  SDL_SetRenderDrawColor(renderer, r,g,b,0xFF);
-  for (uint8_t i=0; i<2; i++) {
-    SDL_RenderClear(renderer); // TODO this is a very ugly way to deal with the double buffering
-    if (i==0)
-      SDL_RenderPresent(renderer); // TODO read when you have internet and also change below
-  }
-}
-
-void rectangle(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2) {
-  for (uint8_t i=0; i<2; i++) {
-    boxColor(renderer, x1, y1, x2, y2, fill_color);
-    if (i==0)
-      SDL_RenderPresent(renderer);
-  }
-}
-
-// misc
-void delay(unsigned int ms) {
-  SDL_Delay(ms);
 }
 
 int main() {
