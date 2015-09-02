@@ -24,9 +24,9 @@ Also it prescribes a folder structure, which makes it easier for students to kee
 
 ## Installation
 
-Lots to do here...
+**On Mac**, you can install the libraries via [homebrew](http://brew.sh/):  `brew install sdl2 sdl2_gfx`. Or do it manually: [sdl 2](https://www.libsdl.org/download-2.0.php) and [sdl2 gfx](http://cms.ferzkopp.net/index.php/software/13-sdl-gfx).
 
-<!-- * on mac: i installed `brew install sdl2 sdl2_gfx` -->
+**On Linux** (Ubuntu), I installed the following (Ubuntu) packages: `libsdl2 libsdl2-dev libsdl2-gfx-dev`.
 
 <!-- I need gfx for drawing ellipses. -->
 <!-- for reference: open /usr/local/Cellar/sdl2_gfx/1.0.0/include/ -->
@@ -37,7 +37,7 @@ In order to get started we create a new project with the `sta` tool:
 
 ```bash
 sta new myprj
-# => Created a new folder: ~/Documents/STA/myprj
+# => Created a new folder: ~/Documents/sta/myprj
 # => Initialized new folder with template default
 # => To get started run: ...
 ```
@@ -104,6 +104,10 @@ Updating existing projects is currently not supported.
 While developing/testing the `sta` tool, I did not want to re-create new projects with `sta new` all the time.
 Hence, I use the following workflow: `cd templates/default; ../../sta build`
 
+**Vagrant**
+For testing the environment of the students I am using a vagrant machine.
+To start the minimalistic window manager please run `sudo startxfce4` in the GUI.
+
 ## TODO
 
 * vagrant: Create ubuntu with Desktop (folder shall include all C code)
@@ -120,4 +124,5 @@ Hence, I use the following workflow: `cd templates/default; ../../sta build`
   * have a random() and millis() function
   * have key and mouse handling (variables can be queried by the loop, e.g. `if (mousePressed) ...`
   * add error checking everywhere
+  * Add API documentation to README
 
