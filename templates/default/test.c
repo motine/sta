@@ -7,10 +7,8 @@ void setup() {
   background(50,50,50);
 }
 
-int i = 0;
-void loop() {
-  fill(100, i*2, i*2);
-  rectangle(i*5, i, i, i*10);
+void draw() {
+  fill(100, frame_no % 255, frame_no % 255);
+  rectangle(frame_no*5, frame_no, frame_no, frame_no*10);
   delay(40);
-  i++;
 }

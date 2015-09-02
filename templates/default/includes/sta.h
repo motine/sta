@@ -24,11 +24,13 @@ const unsigned int HEIGHT = 600;
 
 // forward declarations for methods which need to be defined by the student.
 void setup();
-void loop();
+void draw();
 
 // There will be only one window... For now...
 static SDL_Window* window;
 static SDL_Renderer* renderer;
+
+static unsigned long frame_no = 0; // number of frames since the program started
 
 void init() {
   SDL_Init(SDL_INIT_VIDEO);
@@ -51,7 +53,8 @@ void run() {
       run = 0;
       return;
     }
-    loop();
+    draw();
+    frame_no++;
   }
   SDL_DestroyWindow(window);
   SDL_Quit(); 
