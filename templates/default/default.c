@@ -1,7 +1,6 @@
-// $ gcc default.c -o default `sdl2-config --libs --cflags` -lSDL2_gfx
-// $ ./default
-
+#include "sketchbook.h"
 #include "drawing.h"
+#include "misc.h"
 
 void setup() {
   // do initialization here

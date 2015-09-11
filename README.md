@@ -129,12 +129,11 @@ To start the minimalistic window manager please run `sudo startxfce4` in the GUI
     All projects are assumed under `~/Documents/STA/PROJECT_NAME/`.
   * `update`: download the latest version of the sta script and download new templates and headers/c files from github.
     Keep the templates under `~/.sta/templates/*`.
+* Revise README and README.Drawing.md
+  * Add API documentation to README
 * Add features to wrapper `drawing.h`
-  * set the color for stroke and fill
-  * draw ellipses, rects, lines (filled _and_ outlines, mind the previously set color)
   * have a random() and millis() function
   * add text()
-  * use fill color for background()
   * have key and mouse handling (variables can be queried by the loop, e.g. `if (mousePressed) ...`
   * add error checking everywhere
-  * Add API documentation to README
+* Add style guides/rubocop + the same for c

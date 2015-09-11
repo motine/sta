@@ -12,24 +12,16 @@ class String
 end
 
 PROJECT_PATH_BASE = "~/Documents/sta"
-GCC_OPTS_NAME = "gcc.opts"
+BUILD_COMMAND_FILE = "sta.build.cmd"
 
 module Actions
   
   def self.build(*args)
     check_folder!
-    gcc_cmd = "gcc #{source_file} -o #{executable_file}"
-    
-    gcc_opts_path = File.join(self.folder, GCC_OPTS_NAME)
-    if File.file?(gcc_opts_path)
-      contents = File.read(gcc_opts_path)
-      evaluated = shell("echo \"#{contents}\"", true, "Could not evaluate '#{GCC_OPTS_NAME}'.") # this is not very secure, but a very easy way to evaluate the options in the shell
-      evaluated.gsub!("\n", " ")
-      evaluated.strip!
-      gcc_cmd += " #{evaluated}"
-    end
-    # puts "Running: #{gcc_cmd}".gray
-    shell(gcc_cmd, true, "Compilation failed:")
+    build_command_file_path = File.join(self.folder, BUILD_COMMAND_FILE)
+    abort("There is no build command for the current project.") unless File.file?(build_command_file_path)
+    cmd = File.read(build_command_file_path)
+    shell(cmd, true, "Compilation failed:")
     puts "Success!".green
     puts "Now you can try 'sta run'.".blue
   end

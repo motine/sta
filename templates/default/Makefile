@@ -1,16 +1,16 @@
 CC=gcc
-CFLAGS=-Iinclude -std=c99 $(shell sdl2-config --cflags)
+CFLAGS=-Idrawing -std=c99 $(shell sdl2-config --cflags)
 LIBS=-lSDL2_gfx $(shell sdl2-config --libs)
-PROJECT?= default # if there is no environment variable present
+PROJECT?=default # we set the project name to 'default' if there is no environment variable present
 
 all: $(PROJECT)
 
-%.o: %.c # add %.h
+%.o: %.c %.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(PROJECT): $(PROJECT:=.o)
+$(PROJECT): $(PROJECT:=.o) drawing/drawing.o drawing/misc.o drawing/sketchbook.o
 	gcc -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
 clean:
-	rm -f *.o $(PROJECT)
+	rm -f *.o drawing/*.o $(PROJECT)

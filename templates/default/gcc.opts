@@ -1,1 +1,0 @@
--std=c99 $(sdl2-config --libs --cflags) -lSDL2_gfx
