@@ -1,7 +1,7 @@
 // $ gcc default.c -o default `sdl2-config --libs --cflags` -lSDL2_gfx
 // $ ./default
 
-#include "includes/drawing.h"
+#include "drawing.h"
 
 void setup() {
   // do initialization here
