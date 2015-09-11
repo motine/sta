@@ -6,6 +6,6 @@ void delay(unsigned int ms);
 // returns the milliseconds passed since the program started (since reset_millis was called)
 unsigned long long millis();
 
-// initializes the millis counter, only to be used by drawing.c
-void reset_millis();
+// initializes some stuff
+void init_misc();
 #endif

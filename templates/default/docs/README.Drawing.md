@@ -7,6 +7,8 @@ TODO write intro
 TODO add API docs / include header
 TODO don't forget the functions and constants in sketchbook and misc (e.g. WIDTH)!
 
+TODO document random (this is part of stdlib.h).
+
 ## Setup and draw
 
 the drawing will only be shown on the screen after `draw`.

@@ -1,5 +1,7 @@
 #include "misc.h"
 #include <sys/time.h>
+#include <time.h>
+#include <stdlib.h>
 #include "sketchbook.h"
 
 void delay(unsigned int ms) {
@@ -8,7 +10,8 @@ void delay(unsigned int ms) {
 
 static unsigned long long start_millis = 0;
 
-void reset_millis() {
+void init_misc() {
+  srand(time(NULL));
   start_millis = millis();
 }
 
