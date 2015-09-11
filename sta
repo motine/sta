@@ -21,6 +21,7 @@ module Actions
     build_command_file_path = File.join(self.folder, BUILD_COMMAND_FILE)
     abort("There is no build command for the current project.") unless File.file?(build_command_file_path)
     cmd = File.read(build_command_file_path)
+    ENV["PROJECT"] = self.
     shell(cmd, true, "Compilation failed:")
     puts "Success!".green
     puts "Now you can try 'sta run'.".blue
@@ -57,11 +58,14 @@ module Actions
   def self.folder
     return Dir.pwd
   end
+  def self.project_name
+    return File.basename(folder)
+  end
   def self.source_file
-    return File.join(folder, File.basename(folder) + ".c")
+    return File.join(folder, project_name + ".c")
   end
   def self.executable_file
-    return File.join(folder, File.basename(folder))
+    return File.join(folder, project_name)
   end
 
   # Runs the given command in the shell.
