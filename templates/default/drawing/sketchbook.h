@@ -8,6 +8,7 @@
 
 #define WIDTH 800
 #define HEIGHT 600
+#define FRAME_DURATION 20 // ms, Determines the frame rate (1000/frame rate). If set it to 20 ms we have 50 fps (1000ms / 50frames = 20ms/frame).
 
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;

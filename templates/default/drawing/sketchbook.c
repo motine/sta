@@ -12,7 +12,7 @@ void setup();
 void draw();
 
 // Window and loop stuff
-static unsigned long frame_no = 0; // number of frames since the program started
+static unsigned long long frame_no = 0; // number of frames since the program started
 static uint8_t background_r = 0xCC, background_g = 0xCC, background_b = 0xCC;
 
 void init() {
@@ -29,15 +29,14 @@ void background(uint8_t r, uint8_t g, uint8_t b) {
   background_b = b;
 }
 
-
 // start the main loop and handle ESC
 void run() {
   int run = 1;
   printf("Please hit ESC in the main window to exit the program.\n");
   SDL_Event event;
+  unsigned long long last_draw_millis = 0;
   while (run) {
-    SDL_SetRenderDrawColor(renderer, background_r, background_g, background_b, 0xFF);
-    SDL_RenderClear(renderer);
+    // process events
     SDL_PollEvent(&event);
     if (event.type == SDL_QUIT) {
       run = 0;
@@ -46,9 +45,15 @@ void run() {
       run = 0;
       return;
     }
-    draw();
-    SDL_RenderPresent(renderer);
-    frame_no++;
+    // draw (only if the frame rate demands it)
+    if (millis() - last_draw_millis > FRAME_DURATION) {
+      SDL_SetRenderDrawColor(renderer, background_r, background_g, background_b, 0xFF);
+      SDL_RenderClear(renderer);
+      draw();
+      SDL_RenderPresent(renderer);
+      last_draw_millis = millis();
+      frame_no++;
+    }
   }
   SDL_DestroyWindow(window);
   SDL_Quit(); 

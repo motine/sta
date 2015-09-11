@@ -107,7 +107,8 @@ When a new project is created all files & folders are copied to the (new) projec
 
 A template must have at least one file which is named after the template's name (with extension `.c`).
 This file will then be renamed from `TEMPLATE_NAME.c` to `PROJECT_NAME.c`.
-Optionally, there can be a `gcc.opts` file. This file is evaluated in the bash (yes it may contain shell substitutions) and added to arguments when running `gcc`.
+There must be a `sta.build.cmd` file. The contained (shell) command is evaluated when `sta build` is called.
+The project's name (given when calling new) will be set as an environment variable named `PROJECT`.
 
 **Updates**
 The templates are kept under `~/.sta/templates/*`. If one calls `sta update` (while having internet), the latest version of templates is pulled from `http://github.com/motine/sta`.
@@ -124,6 +125,7 @@ To start the minimalistic window manager please run `sudo startxfce4` in the GUI
 ## TODO
 
 * Add features to `sta`:
+  * Make sta a gem and use gem to update the core. Have an extra repo for templates
   * `new`: create a new folder with template inside.
     Rename `default.c` to `project_name.c`.
     All projects are assumed under `~/Documents/STA/PROJECT_NAME/`.
@@ -131,10 +133,11 @@ To start the minimalistic window manager please run `sudo startxfce4` in the GUI
     Keep the templates under `~/.sta/templates/*`.
 * Revise README and README.Drawing.md
   * Add API documentation to README
+  * add more examples in README.Drawing.md
 * Add features to wrapper `drawing.h`
   * see Notes
   * have a random() function
   * add text()
-  * have key and mouse handling (variables can be queried by the loop, e.g. `if (mousePressed) ...`
+  * have key and mouse handling (variables can be queried by the loop, e.g. `if (mousePressed) ...`, add `mouseX, ...`
   * add error checking everywhere
 * Add style guides/rubocop + the same for c

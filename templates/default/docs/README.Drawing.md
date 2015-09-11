@@ -7,6 +7,10 @@ TODO write intro
 TODO add API docs / include header
 TODO don't forget the functions and constants in sketchbook and misc (e.g. WIDTH)!
 
+## Setup and draw
+
+the drawing will only be shown on the screen after `draw`.
+
 ## Sketching functions
 
 ![](funs.png)
@@ -31,9 +35,27 @@ void draw() {
 }
 ```
 
+## Frame rate
+
+![](fps.png)
+
+The drawing sketchbook will ensure that there is a frame rate of 50 frames per second.
+This ensures we have a near constant time between frames and the frame duration does not vary depending on the processors load.
+
+```c
+// ...
+static int i = 0;
+void draw() {
+  rectangle(i % 100, 10, 100, 100);
+  i++;
+}
+```
+
 ## Coloring
 
 ![](color.png)
+
+_These are the worst colors a human ever chose..._
 
 ```c
 #include "sketchbook.h"
