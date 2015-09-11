@@ -15,7 +15,7 @@ the drawing will only be shown on the screen after `draw`.
 
 ## Sketching functions
 
-![](funs.png)
+![](imgs/funs.png)
 
 ```c
 #include "sketchbook.h"
@@ -39,7 +39,7 @@ void draw() {
 
 ## Frame rate
 
-![](fps.png)
+![](imgs/fps.png)
 
 The drawing sketchbook will ensure that there is a frame rate of 50 frames per second.
 This ensures we have a near constant time between frames and the frame duration does not vary depending on the processors load.
@@ -55,7 +55,7 @@ void draw() {
 
 ## Coloring
 
-![](color.png)
+![](imgs/color.png)
 
 _These are the worst colors a human ever chose..._
 
