@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <stdio.h>
 #include "drawing.h"
+#include "misc.h"
 
 SDL_Window* window;
 SDL_Renderer* renderer;
@@ -18,6 +19,7 @@ void init() {
   SDL_Init(SDL_INIT_VIDEO);
   window = SDL_CreateWindow("sketchbook", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+  reset_millis();
   setup();
 }
 

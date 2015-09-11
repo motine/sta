@@ -132,7 +132,8 @@ To start the minimalistic window manager please run `sudo startxfce4` in the GUI
 * Revise README and README.Drawing.md
   * Add API documentation to README
 * Add features to wrapper `drawing.h`
-  * have a random() and millis() function
+  * see Notes
+  * have a random() function
   * add text()
   * have key and mouse handling (variables can be queried by the loop, e.g. `if (mousePressed) ...`
   * add error checking everywhere

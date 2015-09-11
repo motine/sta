@@ -5,6 +5,7 @@ TODO write intro
 ## Overview
 
 TODO add API docs / include header
+TODO don't forget the functions and constants in sketchbook and misc (e.g. WIDTH)!
 
 ## Sketching functions
 
