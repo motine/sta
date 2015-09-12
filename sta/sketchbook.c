@@ -1,8 +1,6 @@
 #include "sketchbook.h"
 #include <SDL.h>
 #include <stdio.h>
-#include "drawing.h"
-#include "misc.h"
 
 SDL_Window* window;
 SDL_Renderer* renderer;

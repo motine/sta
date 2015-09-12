@@ -31,6 +31,7 @@ SCRIPT
 
 DESKTOP = <<SCRIPT
 apt-get -y install xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+# apt-get -y install ubuntu-gnome-desktop gnome-shell
 apt-get -y install libsdl2 libsdl2-dev libsdl2-gfx-dev
 SCRIPT
 

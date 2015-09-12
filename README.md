@@ -6,10 +6,9 @@ The Simple Teaching Assistant help to teach programming.
 Our students will become engineers, so we chose `C` as language.
 But there is an allure to projects like [Processing](https://processing.org/), which teach programming a little more visual – and a little less black matrix.
 
-The Simple Teaching Assistant takes the edge off of graphical programming by providing a ready-made environment.
-The `sta` tool lets the student easily create projects and compile them.
-These (new) projects are derived from a template. 
-The default template offers a set of simple drawing functions and a `setup`/`draw` structure similar to [Processing's](https://processing.org/examples/loop.html).
+The Simple Teaching Assistant takes the edge off of _graphical_ programming by providing a ready-made environment.
+The provided framework lets the student easily create new graphical solutions and compile them.
+The framework offers a set of simple drawing functions and a `setup`/`draw` structure similar to [Processing's](https://processing.org/examples/loop.html).
 It is based on [SDL 2](https://www.libsdl.org/).
 
 **Why write a wrapper around SDL?**
@@ -17,35 +16,38 @@ First semester students typically don't know about double buffering, window hand
 The thin wrapper removes the need for explaining such things and gives the students simple drawing tools to solve (visual) problems.
 Hence, we, the teachers, can focus on explaining the stuff that really counts: problem solving.
 
-**Why an additional tool?**
-Well, since we are using a couple of libraries, the gcc command becomes quite heavy: `gcc test.c -o test $(sdl2-config --libs --cflags) -lSDL2_gfx`.
-This line is cumbersome to type and adds a lot of room for error. The `sta` tool shall reduce errors during compiling.
-Also it prescribes a folder structure, which makes it easier for students to keep their files tidy and allows the teacher to easily find files on _everyone's_ computer.
-
 ## Installation
 
-**On Mac**, you can install the libraries via [homebrew](http://brew.sh/):  `brew install sdl2 sdl2_gfx`. Or do it manually: [sdl 2](https://www.libsdl.org/download-2.0.php) and [sdl2 gfx](http://cms.ferzkopp.net/index.php/software/13-sdl-gfx).
+**On Mac**, you can install the prerequisites via [homebrew](http://brew.sh/):  `brew install git sdl2 sdl2_gfx`.
 
-**On Linux** (Ubuntu), I installed the following packages: `libsdl2 libsdl2-dev libsdl2-gfx-dev`.
+**On Linux** (Ubuntu), I installed the following packages: `git libsdl2 libsdl2-dev libsdl2-gfx-dev`.
 
-<!-- I need gfx for drawing ellipses. -->
-<!-- for reference: open /usr/local/Cellar/sdl2_gfx/1.0.0/include/ -->
+Or do it manually: [sdl 2](https://www.libsdl.org/download-2.0.php) and [sdl2 gfx](http://cms.ferzkopp.net/index.php/software/13-sdl-gfx).
+
+For offline usage (one student always has problems with his/her wifi), it is highly encouraged to check out the repository locally.
+To do so, please go to:
+
+```bash
+sudo git clone https://github.com/motine/sta.git /usr/local/sta.git
+# later you can then start a new project from the local repo:
+# => git clone /usr/local/sta.git myproject
+```
+
+If you want to update a the local repository or an existing project you can run `git pull` in the respective folder.
 
 ## Get started
 
-In order to get started we create a new project with the `sta` tool:
+In order to get started we create a new project with:
 
 ```bash
-sta new myprj
-# => Created a new folder: ~/Documents/sta/myprj
-# => Initialized new folder with template default
-# => To get started run: ...
+cd ~/Documents
+git clone https://github.com/motine/sta.git myproject # Creates a new folder: ~/Documents/myproject and copies the framework
 ```
 
-The assistant has now created a number of files in the STA folder. The most important file is named after the project. Here this is `myprj.c` and it looks like this:
+The most important file is named `project.c`. This is where the student puts his/her solution. It starts off looking like this:
 
 ```c
-#include "includes/sta.h"
+#include "sketchbook.h"
 
 void setup() {
   // do initialization here
@@ -64,59 +66,103 @@ void draw() {
 }
 ```
 
-Now all left to do is to compile and run the program. Here the assistant helps again:
+Now all left to do is to compile and run the program:
 
 ```bash
-cd ~/Documents/STA/myprj # let's not forget that we have to go to the project first
-sta build # runs gcc with all the -I and -l options and writes the executable to myprj
+cd ~/Documents/myproject # let's not forget that we have to go to the project first
+make # runs gcc with all the -I and -l options and writes the executable to 'project'
 # ... output of GCC ...
-sta run # just calls ./myprj
+./project # opens a window and shows a rectangle
 ```
 
-## The default template
+# The framework
 
-TODO: Document the drawing API here.
+TODO write intro
 
-### Examples
+## Overview
 
-#### Full setup and frame count
+TODO add API docs / include header
+TODO don't forget the functions and constants in sketchbook and misc (e.g. WIDTH)!
+
+TODO document random (this is part of stdlib.h).
+
+## Setup and draw
+
+the drawing will only be shown on the screen after `draw`.
+
+## Sketching functions
+
+![](sta/imgs/funs.png)
 
 ```c
-#include "includes/sta.h"
+#include "sketchbook.h"
 
 void setup() {
-  // remove background
-  background(0, 0, 0); 
-  // set colors
-  fill(100, 50, 50); 
-  stroke(200, 200, 255);
+  // do initialization here
 }
 
 void draw() {
-  rectangle(frame_no*5 % 300, 10, 400, 300); // draw a rect
-  delay(100); // wait a bit, so we see the whole thing build up
+  // this will be repeated on and on and on...
+  rectangle(10, 10, 200, 200);
+  line(10, 20, 40, 10);
+  ellipse(150, 60, 30, 20);
+  circle(80, 150, 20);
+  pie(60, 50, 30, 30, 180);
+  pixel(100, 100);
 }
 ```
 
-## Internals
+## Frame rate
 
-**Templates**
-The templates folder can contain multiple templates.
-If no other option is chosen, the `default` template will be used.
-When a new project is created all files & folders are copied to the (new) project folder.
+![](sta/imgs/fps.png)
 
-A template must have at least one file which is named after the template's name (with extension `.c`).
-This file will then be renamed from `TEMPLATE_NAME.c` to `PROJECT_NAME.c`.
-There must be a `sta.build.cmd` file. The contained (shell) command is evaluated when `sta build` is called.
-The project's name (given when calling new) will be set as an environment variable named `PROJECT`.
+The drawing sketchbook will ensure that there is a frame rate of 50 frames per second.
+This ensures we have a near constant time between frames and the frame duration does not vary depending on the processors load.
 
-**Updates**
-The templates are kept under `~/.sta/templates/*`. If one calls `sta update` (while having internet), the latest version of templates is pulled from `http://github.com/motine/sta`.
-Updating existing projects is currently not supported.
+```c
+// ...
+static int i = 0;
+void draw() {
+  rectangle(i % 100, 10, 100, 100);
+  i++;
+}
+```
 
-**Testing**
-While developing/testing the `sta` tool, I did not want to re-create new projects with `sta new` all the time.
-Hence, I use the following workflow: `cd templates/default; ../../sta build`
+## Coloring
+
+![](sta/imgs/color.png)
+
+_These are the worst colors a human ever chose..._
+
+```c
+#include "sketchbook.h"
+
+void setup() {
+  // do initialization here
+}
+
+void draw() {
+  stroke(255, 0, 0); // apply stroke for all subsequent shapes
+  line(10, 20, 40, 10); // appears red
+
+  fill(0, 255, 0); // apply fill for all following shapes
+  rectangle(10, 10, 150, 150); // has a green background and still red stroke
+
+  stroke(0, 0, 255);
+  no_fill(); // disable filling
+  circle(50, 50, 20); // appears with blue stroke and not no fill
+
+  no_stroke(); // disable stroking
+  circle(10, 10, 10); // this is invisible
+  
+  stroke(0, 0, 0);
+  pixel(100, 100); // adds three black pixels
+  pixel(102, 100);
+  pixel(104, 100);
+}
+```
+
+# Internals
 
 **Vagrant**
 For testing the environment of the students I am using a vagrant machine.
@@ -124,18 +170,10 @@ To start the minimalistic window manager please run `sudo startxfce4` in the GUI
 
 ## TODO
 
-* Add features to `sta`:
-  * Make sta a gem and use gem to update the core. Have an extra repo for templates
-  * `new`: create a new folder with template inside.
-    Rename `default.c` to `project_name.c`.
-    All projects are assumed under `~/Documents/STA/PROJECT_NAME/`.
-  * `update`: download the latest version of the sta script and download new templates and headers/c files from github.
-    Keep the templates under `~/.sta/templates/*`.
-* Revise README and README.Drawing.md
-  * Add API documentation to README
-  * add more examples in README.Drawing.md
-* Add features to wrapper `drawing.h`
-  * see Notes
+* Revise README.md
+  * Add API documentation
+  * add more examples
+* Add features
   * add text()
   * have key and mouse handling (variables can be queried by the loop, e.g. `if (mousePressed) ...`, add `mouseX, ...`
   * add error checking everywhere
