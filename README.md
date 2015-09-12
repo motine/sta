@@ -20,7 +20,7 @@ Hence, we, the teachers, can focus on explaining the stuff that really counts: p
 
 **On Mac**, you can install the prerequisites via [homebrew](http://brew.sh/):  `brew install git sdl2 sdl2_gfx`.
 
-**On Linux** (Ubuntu), I installed the following packages: `git libsdl2 libsdl2-dev libsdl2-gfx-dev`.
+**On Linux** (Ubuntu), I installed the following packages: `sudo apt-get -y install git libsdl2-dev libsdl2-gfx-dev`.
 
 Or do it manually: [sdl 2](https://www.libsdl.org/download-2.0.php) and [sdl2 gfx](http://cms.ferzkopp.net/index.php/software/13-sdl-gfx).
 
@@ -205,6 +205,7 @@ void draw() {
 **Vagrant**
 For testing the environment of the students I am using a vagrant machine.
 To start the minimalistic window manager please run `sudo startxfce4` in the GUI.
+For the full blown gnome run `sudo startx`.
 
 ## TODO
 
@@ -213,6 +214,5 @@ To start the minimalistic window manager please run `sudo startxfce4` in the GUI
   * add more examples
 * Add features
   * add text()
-  * have key and mouse handling (variables can be queried by the loop, e.g. `if (mousePressed) ...`, add `mouseX, ...`
   * add error checking everywhere
 * Add style guides/rubocop + the same for c
