@@ -214,5 +214,6 @@ For the full blown gnome run `sudo startx`.
   * add more examples
 * Add features
   * add text()
+  * add quit()
   * add error checking everywhere
 * Add style guides/rubocop + the same for c
