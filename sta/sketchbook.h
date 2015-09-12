@@ -6,6 +6,7 @@
 
 #include "SDL.h"
 #include "drawing.h"
+#include "input.h"
 #include "misc.h"
 
 #define WIDTH 800

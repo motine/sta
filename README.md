@@ -128,6 +128,44 @@ void draw() {
 }
 ```
 
+## Mouse & Keyboard
+
+![](sta/imgs/mouse.png)
+
+For the sake of simplicity, there is no event listeners or event polling. There are "just" functions to ask for the current mouse position and check which key is currently pressed.
+This approach limits the keyboard input to only recognizing a single key at any given time.
+
+```c
+// ...
+void draw() {
+  rectangle(10, 10, mouse_x(), mouse_y());
+}
+```
+
+![](sta/imgs/buttons.png)
+
+Handling buttons and keys is done like this:
+
+```c
+// ...
+void draw() {
+  if (mouse_pressed()) { // checks if the left mouse button is pressed
+    stroke(255, 0, 0);
+  } else {
+    stroke(200, 200, 200);
+  }
+  
+  if (key_pressed(SDL_SCANCODE_RETURN)) { // checks if the enter key is pressed
+    fill(255, 0, 0);
+  } else {
+    fill(255, 255, 255);
+  }
+  
+  rectangle(10, 10, 100, 100);
+}
+```
+
+
 ## Coloring
 
 ![](sta/imgs/color.png)
