@@ -1,6 +1,7 @@
 #include "drawing.h"
 #include "sketchbook.h"
 #include <SDL2_gfxPrimitives.h>
+#include <SDL_TTF.h>
 
 // -- colors
 static uint8_t fill_r = 0xFF, fill_g = 0xFF, fill_b = 0xFF, fill_a = 0xFF;
@@ -57,4 +58,37 @@ void pixel(unsigned int x, unsigned int y) {
   pixelRGBA(renderer, x, y, stroke_r, stroke_g, stroke_b, stroke_a);
 }
 
+
+// -- text
+static TTF_Font* standard_font;
+
+void text(unsigned int x, unsigned int y, const char* text) {
+  SDL_Surface *screen = SDL_GetWindowSurface(window);
+  SDL_Color color = {stroke_r, stroke_g, stroke_b, 0};
+  
+  SDL_Surface* surface = TTF_RenderText_Blended(standard_font, text, color);
+  int surface_width = surface->w;
+  int surface_height = surface->h;
+  SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+  SDL_FreeSurface(surface);
+  
+  SDL_Rect dest_rect = {x, y, surface_width, surface_height};
+  SDL_RenderCopy(renderer, texture, NULL, &dest_rect);
+  
+  SDL_DestroyTexture(texture);
+}
+
+void drawing_init() {
+  TTF_Init();
+  standard_font = TTF_OpenFont("sta/fonts/Courier_Prime_Bold.ttf", 20);
+}
+
+void drawing_loop() {
+  
+}
+
+void drawing_free() {
+  TTF_CloseFont(standard_font);
+  TTF_Quit();
+}
 

@@ -29,4 +29,13 @@ void pie(unsigned int x, unsigned int y, unsigned int r, unsigned int start, uns
 // Sets the given pixel to the stroke color.
 void pixel(unsigned int x, unsigned int y);
 
+#define DEFAULT_FONT_SIZE 20 // pt
+// Draws the given text at (x,y), using the stroke color.
+void text(unsigned int x, unsigned int y, const char* text);
+
+// initializes some stuff
+void drawing_init();
+void drawing_loop();
+void drawing_free();
+
 #endif

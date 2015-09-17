@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Ista -std=c99 $(shell sdl2-config --cflags)
-LIBS=-lSDL2_gfx $(shell sdl2-config --libs)
+LIBS=-lSDL2_gfx -lSDL2_ttf $(shell sdl2-config --libs)
 
 all: project
 

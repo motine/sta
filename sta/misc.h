@@ -5,6 +5,6 @@
 unsigned long long millis();
 
 // initializes some stuff
-void init_misc();
+void misc_init();
 
 #endif

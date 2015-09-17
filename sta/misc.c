@@ -6,7 +6,7 @@
 
 static unsigned long long start_millis = 0;
 
-void init_misc() {
+void misc_init() {
   srand(time(NULL));
   start_millis = millis();
 }

@@ -18,7 +18,7 @@ We – teachers – can focus on explaining the stuff that really counts: proble
 
 ## Prerequisites
 
-**On Mac**, you can install the prerequisites via [homebrew](http://brew.sh/):  `brew install git sdl2 sdl2_gfx`.
+**On Mac**, you can install the prerequisites via [homebrew](http://brew.sh/):  `brew install git sdl2 sdl2_gfx sdl2_ttf`.
 
 **On Linux** (Ubuntu), I installed the following packages: `sudo apt-get -y install git libsdl2-dev libsdl2-gfx-dev`.
 
@@ -126,6 +126,9 @@ void pie(unsigned int x, unsigned int y, unsigned int r, unsigned int start, uns
 // Sets the given pixel to the stroke color.
 void pixel(unsigned int x, unsigned int y);
 
+// Draws the given text at (x,y), using the stroke color.
+void text(unsigned int x, unsigned int y, const char* text);
+
 // Set the background color. It is used to clear the screen before each `draw()` call.
 void background(unsigned short r, unsigned short g, unsigned short b);
 ```
@@ -200,6 +203,7 @@ void draw() {
   circle(80, 150, 20);
   pie(60, 50, 30, 30, 180);
   pixel(100, 100);
+  text(100, 100, "draw!");
 }
 ```
 
@@ -308,7 +312,6 @@ I guess these simplifications should considered carefully for a real world proje
 
 <!--
 TODO document coordinate system
-TODO Add feature: add text()
 TODO add error checking everywhere
 TODO Add style guides/rubocop + the same for c
 TODO Add resume when r is pressed?

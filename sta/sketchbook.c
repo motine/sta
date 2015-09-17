@@ -32,7 +32,8 @@ void init() {
   SDL_Init(SDL_INIT_VIDEO);
   window = SDL_CreateWindow("sketchbook", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-  init_misc();
+  drawing_init();
+  misc_init();
   setup();
 }
 
@@ -55,6 +56,7 @@ void run() {
     }
     // draw (only if the frame rate demands it)
     if (millis() - last_draw_millis > FRAME_DURATION) {
+      drawing_loop();
       SDL_SetRenderDrawColor(renderer, background_r, background_g, background_b, 0xFF);
       SDL_RenderClear(renderer);
       draw();
@@ -63,6 +65,7 @@ void run() {
       frame_no++;
     }
   }
+  drawing_free();
   SDL_DestroyWindow(window);
   SDL_Quit(); 
 }
