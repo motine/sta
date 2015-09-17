@@ -20,7 +20,6 @@ void no_stroke();
 // set background color (used to clear the screen at the start of each main loop iteration, i.e. before draw is called)
 void background(uint8_t r, uint8_t g, uint8_t b);
 
-
 // uses the background color to clear the screen
 void clear();
 

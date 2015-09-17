@@ -1,17 +1,32 @@
 #include "sketchbook.h"
-#include <SDL.h>
 #include <stdio.h>
 
 SDL_Window* window;
 SDL_Renderer* renderer;
 
-// forward declarations for methods which need to be defined by the student.
-void setup();
-void draw();
-
-// Window and loop stuff
+// window and loop stuff
 static unsigned long long frame_no = 0; // number of frames since the program started
 static uint8_t background_r = 0xCC, background_g = 0xCC, background_b = 0xCC;
+static bool terminated = false;
+static bool stopped = false;
+
+void stop() {
+  stopped = true;
+}
+
+void quit() {
+  terminated = true;
+}
+
+unsigned long long frame_index() {
+  return frame_no;
+}
+
+void background(uint8_t r, uint8_t g, uint8_t b) {
+  background_r = r;
+  background_g = g;
+  background_b = b;
+}
 
 void init() {
   SDL_Init(SDL_INIT_VIDEO);
@@ -21,27 +36,22 @@ void init() {
   setup();
 }
 
-void background(uint8_t r, uint8_t g, uint8_t b) {
-  background_r = r;
-  background_g = g;
-  background_b = b;
-}
-
 // start the main loop and handle ESC
 void run() {
-  int run = 1;
   printf("Please hit ESC in the main window to exit the program.\n");
   SDL_Event event;
   unsigned long long last_draw_millis = 0;
-  while (run) {
+  while (!terminated) {
     // process events
     SDL_PollEvent(&event);
     if (event.type == SDL_QUIT) {
-      run = 0;
+      break;
     }
     if ((event.type == SDL_KEYDOWN) && (event.key.keysym.sym == SDLK_ESCAPE)) {
-      run = 0;
-      return;
+      break;
+    }
+    if (stopped) {
+      continue;
     }
     // draw (only if the frame rate demands it)
     if (millis() - last_draw_millis > FRAME_DURATION) {
