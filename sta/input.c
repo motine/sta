@@ -13,11 +13,11 @@ unsigned int mouse_y() {
   return y;
 }
 
-int mouse_pressed() {
+bool mouse_pressed() {
   return SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT);
 }
 
-int key_pressed(uint8_t key) {
+bool key_pressed(uint8_t key) {
   const uint8_t* state = SDL_GetKeyboardState(NULL);
   return state[key];
 }
