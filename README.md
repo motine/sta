@@ -74,6 +74,9 @@ If this all works nice and dany, we can start changing our `setup` and `draw` me
 
 The framework, which is used by including `sketchbook.h`, provides a `main` function.
 By default, it brings up a 800 x 600 px wide window.
+
+![Coordinate system](sta/imgs/coor.png)
+
 It calls the `setup` method once before the drawing starts. It can be used to do initialization.
 
 To see something on the screen, we need to write a `draw` method.
