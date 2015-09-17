@@ -104,9 +104,13 @@ void stop();
 void quit();
 ```
 
-**Drawing functions**
+**Drawing**
 
 ```c
+// Get the window's dimensions
+WIDTH
+HEIGHT
+
 // Set fill color for drawing future shapes.
 void fill(unsigned short r, unsigned short g, unsigned short b);
 // Disable filling shapes.
@@ -136,7 +140,7 @@ void text(unsigned int x, unsigned int y, const char* text);
 void background(unsigned short r, unsigned short g, unsigned short b);
 ```
   
-**Input functions**
+**Input**
   
 ```c
 // Returns the current x mouse cooridinate.
@@ -152,7 +156,7 @@ bool mouse_pressed();
 bool key_pressed(unsigned short key);
 ```
 
-**Timeline functions**
+**Timeline**
 
 ```c
 // Returns the number of milliseconds passed since the program started.
