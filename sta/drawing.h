@@ -15,11 +15,6 @@ void no_fill();
 void stroke(uint8_t r, uint8_t g, uint8_t b);
 // disable stroking shapes
 void no_stroke();
-// set background color (used to clear the screen at the start of each main loop iteration, i.e. before draw is called)
-void background(uint8_t r, uint8_t g, uint8_t b);
-
-// uses the background color to clear the screen
-void clear();
 
 // draws a line from (x1, y1) to (x2, y2) with the stroke color
 void line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2);
