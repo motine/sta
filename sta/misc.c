@@ -4,10 +4,6 @@
 #include <stdlib.h>
 #include "sketchbook.h"
 
-void delay(unsigned int ms) {
-  SDL_Delay(ms);
-}
-
 static unsigned long long start_millis = 0;
 
 void init_misc() {
