@@ -10,22 +10,23 @@
 // The sketchbook brings up the main window and provides the main functions.
 // It will will expects a `void setup()` and a `void draw()` function to be defined somewhere else (in the student's program).
 
-// forward declarations for methods which need to be defined by the student
-// this method is not implemented in the c file!
-void setup();
-// this method is not implemented in the c file!
-void draw();
+// Called once before the calls to `draw` start.
+void setup(); // !! This method must be provided by the student (in the `project.c` file).
 
-// stop re-drawing. the result of the last image will be kept on the screen.
+// This method is called over and over again.
+// Right before the screen is emtied, right after all the drawing is put on the screen. 
+void draw(); // !! This method must be provided by the student (in the `project.c` file)
+
+// Stop the calls to `draw`. The result of the current `draw` will be kept on the screen forever.
 void stop();
-// terminate the application
+// Terminate the application after the current `draw`.
 void quit();
 
-// returns the number of the frame which is currently shown/drawn.
+// Returns the number of the frame which is currently drawn.
 // The result of the first draw method has frame index 0, the next 1, ...
 unsigned long long frame_index();
 
-// set the color for the background used to clear the screen before each `draw()` call.
+// Set the background color. It is used to clear the screen before each `draw()` call.
 void background(uint8_t r, uint8_t g, uint8_t b);
 
 // --- internals

@@ -1,7 +1,7 @@
 #ifndef MISC_H
 #define MISC_H
 
-// returns the milliseconds passed since the program started (since reset_millis was called)
+// Returns the number of milliseconds passed since the program started.
 unsigned long long millis();
 
 // initializes some stuff

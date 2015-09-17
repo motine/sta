@@ -1,35 +1,35 @@
 # Simple Teaching Assistant
 
-**This is not ripe yet. I will add more documentation as soon as I get somewhere with this project.**
+## Why?
 
-The Simple Teaching Assistant help to teach programming.
+The Simple Teaching Assistant helps teaching programming.
 Our students will become engineers, so we chose `C` as language.
 But there is an allure to projects like [Processing](https://processing.org/), which teach programming a little more visual – and a little less black matrix.
 
 The Simple Teaching Assistant takes the edge off of _graphical_ programming by providing a ready-made environment.
-The provided framework lets the student easily create new graphical solutions and compile them.
-The framework offers a set of simple drawing functions and a `setup`/`draw` structure similar to [Processing's](https://processing.org/examples/loop.html).
+The provided framework lets the student easily create graphical solutions and compile them.
+The framework offers a set of drawing functions and a `setup`/`draw` structure similar to [Processing's](https://processing.org/examples/loop.html).
 It is based on [SDL 2](https://www.libsdl.org/).
 
 **Why write a wrapper around SDL?**
 First semester students typically don't know about double buffering, window handles or texture rendering.
-The thin wrapper removes the need for explaining such things and gives the students simple drawing tools to solve (visual) problems.
-Hence, we, the teachers, can focus on explaining the stuff that really counts: problem solving.
+The thin wrapper removes the need for explaining such things and arms the students with tools to solve (visual) problems.
+We – teachers – can focus on explaining the stuff that really counts: problem solving.
 
-## Installation
+## Prerequisites
 
 **On Mac**, you can install the prerequisites via [homebrew](http://brew.sh/):  `brew install git sdl2 sdl2_gfx`.
 
 **On Linux** (Ubuntu), I installed the following packages: `sudo apt-get -y install git libsdl2-dev libsdl2-gfx-dev`.
 
-Or do it manually: [sdl 2](https://www.libsdl.org/download-2.0.php) and [sdl2 gfx](http://cms.ferzkopp.net/index.php/software/13-sdl-gfx).
+Or do it **without a package manager** and follow the instructions on these respective sites: [git](https://git-scm.com/), [SDL 2](https://www.libsdl.org/download-2.0.php) and [SDL GFX](http://cms.ferzkopp.net/index.php/software/13-sdl-gfx).
 
-For offline usage (one student always has problems with his/her wifi), it is highly encouraged to check out the repository locally.
+For offline usage (one student always has problems with wifi), it is highly encouraged to check out a local copy of the repository.
 To do so, please go to:
 
 ```bash
 sudo git clone https://github.com/motine/sta.git /usr/local/sta.git
-# later you can then start a new project from the local repo:
+# later the teacher can halp and start a new project from the local repo:
 # => git clone /usr/local/sta.git myproject
 ```
 
@@ -37,14 +37,14 @@ If you want to update a the local repository or an existing project you can run 
 
 ## Get started
 
-In order to get started we create a new project with:
+We create a new project with:
 
 ```bash
 cd ~/Documents
 git clone https://github.com/motine/sta.git myproject # Creates a new folder: ~/Documents/myproject and copies the framework
 ```
 
-The most important file is named `project.c`. This is where the student puts his/her solution. It starts off looking like this:
+The most important file is named `project.c`. This is where the student puts his/her solution. It starts off looking something like this:
 
 ```c
 #include "sketchbook.h"
@@ -55,18 +55,11 @@ void setup() {
 
 void draw() {
   // this will be repeated on and on and on...
+  rectangle(10, 10, 100, 100);
 }
 ```
 
-Let's do something with the program and change the contents of the draw function to:
-
-```c
-void draw() {
-  rectangle(10, 10, 400, 300);
-}
-```
-
-Now all left to do is to compile and run the program:
+Now, we compile and run:
 
 ```bash
 cd ~/Documents/myproject # let's not forget that we have to go to the project first
@@ -75,22 +68,120 @@ make # runs gcc with all the -I and -l options and writes the executable to 'pro
 ./project # opens a window and shows a rectangle
 ```
 
-# The framework
+If this all works nice and dany, we can start changing our `setup` and `draw` methods.
 
-TODO write intro
+# Sketchbook
 
-## Overview
+The framework, which is used by including `sketchbook.h`, provides a `main` function.
+By default, it brings up a 800 x 600 px wide window.
+It calls the `setup` method once before the drawing starts. It can be used to do initialization.
 
-TODO add API docs / include header
-TODO don't forget the functions and constants in sketchbook and misc (e.g. WIDTH)!
+To see something on the screen, we need to write a `draw` method.
+This method is called 50 times a second (if the computer is fast enough).
+All drawing code is executed and the final picture is put on the screen right after the method has finished.
+It is highly discouraged to use delay or similar functions in the `draw` method.
+This interferes with keyboard, mouse and other handlers.
 
-TODO document random (this is part of stdlib.h).
+## Overview / API
 
-## Setup and draw
+_For simplicity all types like `uint8_t` have been replaced with common standard types like `unsigned short`. The actual function definition in the header file may differ_
 
-the drawing will only be shown on the screen after `draw`.
+**Program flow**
 
-## Sketching functions
+```c
+// Called once before the calls to `draw` start.
+void setup(); // !! This method must be provided by the student (in the `project.c` file).
+// This method is called over and over again.
+// Right before the screen is emtied, right after all the drawing is put on the screen. 
+void draw(); // !! This method must be provided by the student (in the `project.c` file)
+
+// Stop the calls to `draw`. The result of the current `draw` will be kept on the screen forever.
+void stop();
+// Terminate the application after the current `draw`.
+void quit();
+```
+
+**Drawing functions**
+
+```c
+// Set fill color for drawing future shapes.
+void fill(unsigned short r, unsigned short g, unsigned short b);
+// Disable filling shapes.
+void no_fill();
+// Set stroke color for drawing future shapes.
+void stroke(unsigned short r, unsigned short g, unsigned short b);
+// Disable stroking future shapes.
+void no_stroke();
+
+// Draws a line from (x1, y1) to (x2, y2) with the stroke color.
+void line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2);
+// Draws a rectangle from (x1, y1) to (x2, y2).
+void rectangle(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2);
+// Draws an ellipse around (x, y) with the radius of rx and ry.
+void ellipse(unsigned int x, unsigned int y, unsigned int rx, unsigned int ry);
+// Draws a circle with its midpoint at (x, y) and radius r.
+void circle(unsigned int x, unsigned int y, unsigned int r);
+// Draws a pie piece around the midpoint (x,y) and radius r. Start and end angle are given in degrees
+void pie(unsigned int x, unsigned int y, unsigned int r, unsigned int start, unsigned int end);
+// Sets the given pixel to the stroke color.
+void pixel(unsigned int x, unsigned int y);
+
+// Set the background color. It is used to clear the screen before each `draw()` call.
+void background(unsigned short r, unsigned short g, unsigned short b);
+```
+  
+**Input functions**
+  
+```c
+// Returns the current x mouse cooridinate.
+unsigned int mouse_x();
+// Returns the current y mouse cooridinate.
+unsigned int mouse_y();
+// Returns true if the left mouse button is pressed.
+bool mouse_pressed();
+
+// Returns true if the given key is pressed.
+// Valid keys are found in the "SDL_Scancode Value" column of this table: https://wiki.libsdl.org/SDL_Scancode
+// Be aware: The ESC key is handled by the framework itself and will quit the application.
+bool key_pressed(unsigned short key);
+```
+
+**Timeline functions**
+
+```c
+// Returns the number of milliseconds passed since the program started.
+unsigned long long millis();
+
+// Returns the number of the frame which is currently drawn.
+// The result of the first draw method has frame index 0, the next 1, ...
+unsigned long long frame_index();
+```
+
+**Useful stuff from other libraries**
+
+```c
+// Sketchbook includes `stdbool.h`. It defines the type
+bool // and the values
+false	// as 0
+true	// as 1
+
+// Returns a pseudo-random number between ​0​ and the highest positive number of int.
+int rand(); // You don't need to worrie about calling srand(). Sketchbook does it automatically for you.
+
+// Sketchbook includes the `math.h` library. Please see the API here: http://devdocs.io/c/numeric/math
+double fabs(double x); // All sorts of trigonometric functions
+double sin(double x);
+double cos(double x);
+double tan(double x);
+M_PI // And the value of PI
+
+// Sketchbook also includes the whole `SDL.h` library with `SDL2_gfxPrimitives.h`. Please refrain from using the methods directly though.
+// It also uses `stdint.h` in its headers.
+```
+
+## Examples
+
+### Sketching functions
 
 ![](sta/imgs/funs.png)
 
@@ -112,12 +203,12 @@ void draw() {
 }
 ```
 
-## Frame rate
+### Frame rate
 
 ![](sta/imgs/fps.png)
 
-The drawing sketchbook will ensure that there is a frame rate of 50 frames per second.
-This ensures we have a near constant time between frames and the frame duration does not vary depending on the processors load.
+The drawing sketchbook will ensure that there is a frame rate of 50 frames per second (if the computer is fast enough).
+This ensures we have a near constant time between frames and the frame duration does not vary much (e.g. because of processors load).
 
 ```c
 // ...
@@ -128,12 +219,13 @@ void draw() {
 }
 ```
 
-## Mouse & Keyboard
+### Mouse & Keyboard
 
 ![](sta/imgs/mouse.png)
 
-For the sake of simplicity, there is no event listeners or event polling. There are "just" functions to ask for the current mouse position and check which key is currently pressed.
-This approach limits the keyboard input to only recognizing a single key at any given time.
+For the sake of simplicity, there is no event listeners or event polling.
+Yet, there are functions to ask for the current mouse position and check which key is currently pressed.
+_Limitation: We can only recognizing a single key at any given time._
 
 ```c
 // ...
@@ -166,7 +258,7 @@ void draw() {
 ```
 
 
-## Coloring
+### Coloring
 
 ![](sta/imgs/color.png)
 
@@ -207,13 +299,17 @@ For testing the environment of the students I am using a vagrant machine.
 To start the minimalistic window manager please run `sudo startxfce4` in the GUI.
 For the full blown gnome run `sudo startx`.
 
-## TODO
+## Disclaimer
 
-* Revise README.md
-  * Add API documentation
-  * add more examples
-* Add features
-  * add text()
-  * add quit()
-  * add error checking everywhere
-* Add style guides/rubocop + the same for c
+I am aware that some of the choices I made are quite opinionated.
+Two examples are: I am providing a main function in a module (ugh) and I am using 50 fps and not a decent time difference method.
+These two choices – and many others – were made because I think they make teaching simpler.
+I guess these simplifications should considered carefully for a real world project.
+
+<!--
+TODO document coordinate system
+TODO Add feature: add text()
+TODO add error checking everywhere
+TODO Add style guides/rubocop + the same for c
+TODO Add resume when r is pressed?
+-->
