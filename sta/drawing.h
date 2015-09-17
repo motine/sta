@@ -7,8 +7,6 @@
 #include <stdint.h>
 #include <math.h> // include pie by default
 
-uint32_t rgb(uint8_t r, uint8_t g, uint8_t b);
-
 // set fill color
 void fill(uint8_t r, uint8_t g, uint8_t b);
 // disable filling shapes
