@@ -20,7 +20,7 @@ We – teachers – can focus on explaining the stuff that really counts: proble
 
 **On Mac**, you can install the prerequisites via [homebrew](http://brew.sh/):  `brew install git sdl2 sdl2_gfx sdl2_ttf`.
 
-**On Linux** (Ubuntu), I installed the following packages: `sudo apt-get -y install git libsdl2-dev libsdl2-gfx-dev`.
+**On Linux** (Ubuntu), I installed the following packages: `sudo apt-get -y install git libsdl2-dev libsdl2-gfx-dev libsdl2-ttf-dev`.
 
 Or do it **without a package manager** and follow the instructions on these respective sites: [git](https://git-scm.com/), [SDL 2](https://www.libsdl.org/download-2.0.php) and [SDL GFX](http://cms.ferzkopp.net/index.php/software/13-sdl-gfx).
 
@@ -314,7 +314,6 @@ These two choices – and many others – were made because I think they make te
 I guess these simplifications should considered carefully for a real world project.
 
 <!--
-TODO document coordinate system
 TODO add error checking everywhere
 TODO Add style guides/rubocop + the same for c
 TODO Add resume when r is pressed?

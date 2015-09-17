@@ -1,7 +1,7 @@
 #include "drawing.h"
 #include "sketchbook.h"
 #include <SDL2_gfxPrimitives.h>
-#include <SDL_TTF.h>
+#include <SDL_ttf.h>
 
 // -- colors
 static uint8_t fill_r, fill_g, fill_b, fill_a;
