@@ -4,8 +4,21 @@
 #include <SDL_TTF.h>
 
 // -- colors
-static uint8_t fill_r = 0xFF, fill_g = 0xFF, fill_b = 0xFF, fill_a = 0xFF;
-static uint8_t stroke_r = 0x66, stroke_g = 0x66, stroke_b = 0x66, stroke_a = 0xFF;
+static uint8_t fill_r, fill_g, fill_b, fill_a;
+static uint8_t stroke_r, stroke_g, stroke_b, stroke_a;
+
+void default_stoke() {
+  stroke_r = 0x66;
+  stroke_g = 0x66;
+  stroke_b = 0x66;
+  stroke_a = 0xFF;
+}
+void default_fill() {
+  fill_r = 0xFF;
+  fill_g = 0xFF;
+  fill_b = 0xFF;
+  fill_a = 0xFF;
+}
 
 void fill(uint8_t r, uint8_t g, uint8_t b) {
   fill_r = r;
@@ -84,7 +97,8 @@ void drawing_init() {
 }
 
 void drawing_loop() {
-  
+  default_stoke();
+  default_fill();
 }
 
 void drawing_free() {
