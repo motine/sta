@@ -68,7 +68,7 @@ make # runs gcc with all the -I and -l options and writes the executable to 'pro
 ./project # opens a window and shows a rectangle
 ```
 
-If this all works nice and dany, we can start changing our `setup` and `draw` methods.
+If this all works fine and dandy, we can start changing our `setup` and `draw` methods.
 
 # Sketchbook
 
