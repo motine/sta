@@ -5,7 +5,7 @@ SDL_Window* window;
 SDL_Renderer* renderer;
 
 // window and loop stuff
-static unsigned long long frame_no = 0; // number of frames since the program started
+static unsigned long long frame_no = 0;  // number of frames since the program started
 static uint8_t background_r = 0xCC, background_g = 0xCC, background_b = 0xCC;
 static bool terminated = false;
 static bool stopped = false;
@@ -67,11 +67,11 @@ void run() {
   }
   drawing_free();
   SDL_DestroyWindow(window);
-  SDL_Quit(); 
+  SDL_Quit();
 }
 
 int main() {
   init();
   run();
-	return 0;
+  return 0;
 }

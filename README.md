@@ -310,6 +310,10 @@ For testing the environment of the students I am using a vagrant machine.
 To start the minimalistic window manager please run `sudo startxfce4` in the GUI.
 For the full blown gnome run `sudo startx`.
 
+**Code style**
+To enforce code style please use `clang-format -style='{ BasedOnStyle: Chromium, ColumnLimit: 200 }' -i filename.c`. This command will use the `.clang-format` config and replace without asking.
+To check a number of files, please use `for i in *.c; do echo "------------- $i"; clang-format -style='{ BasedOnStyle: Chromium, ColumnLimit: 200 }' $i | diff - $i; done | mate`.
+
 ## Disclaimer
 
 I am aware that some of the choices I made are quite opinionated.
