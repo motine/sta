@@ -71,23 +71,22 @@ void pixel(unsigned int x, unsigned int y) {
   pixelRGBA(renderer, x, y, stroke_r, stroke_g, stroke_b, stroke_a);
 }
 
-
 // -- text
 static TTF_Font* standard_font;
 
 void text(unsigned int x, unsigned int y, const char* text) {
-  SDL_Surface *screen = SDL_GetWindowSurface(window);
+  SDL_Surface* screen = SDL_GetWindowSurface(window);
   SDL_Color color = {stroke_r, stroke_g, stroke_b, 0};
-  
+
   SDL_Surface* surface = TTF_RenderText_Blended(standard_font, text, color);
   int surface_width = surface->w;
   int surface_height = surface->h;
   SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
   SDL_FreeSurface(surface);
-  
+
   SDL_Rect dest_rect = {x, y, surface_width, surface_height};
   SDL_RenderCopy(renderer, texture, NULL, &dest_rect);
-  
+
   SDL_DestroyTexture(texture);
 }
 
@@ -105,4 +104,3 @@ void drawing_free() {
   TTF_CloseFont(standard_font);
   TTF_Quit();
 }
-
