@@ -175,6 +175,10 @@ bool // and the values
 false	// as 0
 true	// as 1
 
+// minimum and maximum values
+MIN(X, Y);
+MAX(X, Y);
+
 // Returns a pseudo-random number between ​0​ and the highest positive number of int.
 int rand(); // You don't need to worrie about calling srand(). Sketchbook does it automatically for you.
 
