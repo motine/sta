@@ -7,11 +7,11 @@
 #include <stdint.h>
 #include <math.h> // include PI by default
 
-// Set fill color for drawing future shapes.
+// Set fill color for drawing future shapes. Each RGB component shall be between 0..255.
 void fill(uint8_t r, uint8_t g, uint8_t b);
 // Disable filling shapes.
 void no_fill();
-// Set stroke color for drawing future shapes.
+// Set stroke color for drawing future shapes. Each RGB component shall be between 0..255.
 void stroke(uint8_t r, uint8_t g, uint8_t b);
 // Disable stroking future shapes.
 void no_stroke();

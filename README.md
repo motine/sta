@@ -111,11 +111,11 @@ void quit();
 WIDTH
 HEIGHT
 
-// Set fill color for drawing future shapes.
+// Set fill color for drawing future shapes. Each RGB component shall be between 0..255.
 void fill(unsigned short r, unsigned short g, unsigned short b);
 // Disable filling shapes.
 void no_fill();
-// Set stroke color for drawing future shapes.
+// Set stroke color for drawing future shapes. Each RGB component shall be between 0..255.
 void stroke(unsigned short r, unsigned short g, unsigned short b);
 // Disable stroking future shapes.
 void no_stroke();
@@ -136,7 +136,7 @@ void pixel(unsigned int x, unsigned int y);
 // Draws the given text at (x,y), using the stroke color.
 void text(unsigned int x, unsigned int y, const char* text);
 
-// Set the background color. It is used to clear the screen before each `draw()` call.
+// Set the background color through RGB values from 0..255. It is used to clear the screen before each `draw()` call.
 void background(unsigned short r, unsigned short g, unsigned short b);
 ```
   

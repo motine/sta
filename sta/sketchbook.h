@@ -26,7 +26,7 @@ void quit();
 // The result of the first draw method has frame index 0, the next 1, ...
 unsigned long long frame_index();
 
-// Set the background color. It is used to clear the screen before each `draw()` call.
+// Set the background color through RGB values from 0..255. It is used to clear the screen before each `draw()` call.
 void background(uint8_t r, uint8_t g, uint8_t b);
 
 // --- internals
