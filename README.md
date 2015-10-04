@@ -29,7 +29,7 @@ To do so, please go to:
 
 ```bash
 sudo git clone https://github.com/motine/sta.git /usr/local/sta.git
-# later the teacher can halp and start a new project from the local repo:
+# later the teacher can help and start a new project from the local repo:
 # => git clone /usr/local/sta.git myproject
 ```
 
@@ -95,7 +95,7 @@ _For simplicity all types like `uint8_t` have been replaced with common standard
 // Called once before the calls to `draw` start.
 void setup(); // !! This method must be provided by the student (in the `project.c` file).
 // This method is called over and over again.
-// Right before the screen is emtied, right after all the drawing is put on the screen. 
+// Right before the screen is emptied, right after all the drawing is put on the screen. 
 void draw(); // !! This method must be provided by the student (in the `project.c` file)
 
 // Stop the calls to `draw`. The result of the current `draw` will be kept on the screen forever.
@@ -143,9 +143,9 @@ void background(unsigned short r, unsigned short g, unsigned short b);
 **Input**
   
 ```c
-// Returns the current x mouse cooridinate.
+// Returns the current x mouse coordinate.
 unsigned int mouse_x();
-// Returns the current y mouse cooridinate.
+// Returns the current y mouse coordinate.
 unsigned int mouse_y();
 // Returns true if the left mouse button is pressed.
 bool mouse_pressed();
@@ -167,6 +167,16 @@ unsigned long long millis();
 unsigned long long frame_index();
 ```
 
+**Debugging**
+
+```c
+// Add a inspection to the debug overlay ("prefix: value").
+// Right before the draw function is called, the overlay will be cleared.
+// This means this method can be called multiple times during draw, but only the inspections added in the last draw will be shown.
+// The overlay will be drawn after the draw method ran.
+void debug(const char* prefix, TYPE value); // where TYPE can be any form of number
+```
+
 **Useful stuff from other libraries**
 
 ```c
@@ -180,7 +190,7 @@ MIN(X, Y);
 MAX(X, Y);
 
 // Returns a pseudo-random number between ​0​ and the highest positive number of int.
-int rand(); // You don't need to worrie about calling srand(). Sketchbook does it automatically for you.
+int rand(); // You don't need to worry about calling srand(). Sketchbook does it automatically for you.
 
 // Sketchbook includes the `math.h` library. Please see the API here: http://devdocs.io/c/numeric/math
 double fabs(double x); // All sorts of trigonometric functions
@@ -215,6 +225,29 @@ void draw() {
   pie(60, 50, 30, 30, 180);
   pixel(100, 100);
   text(100, 100, "draw!");
+}
+```
+
+### Debugging
+
+![](sta/imgs/debug.png)
+
+Debugging can be hard. One should consider to use a real debugger such a `gdb`.
+But, since the usage of such tools can be daunting, let's use the good old `printf` debugger.
+This means, we let the values of the variables in question show up on the screen.
+Simply add an inspection with the `debug` method.
+All inspections will be remembered and overlaid right after the `draw` method.
+The inspections are then cleared to have a fresh start right before the next `draw` call.
+
+```c
+// ...
+void draw() {
+  float f = 77.9;
+  int i = 42;
+  // ...your complicated calculation goes here...
+  debug("f", f);
+  debug("the crass value of i", i);
+  // will show an overlay similar to the one above
 }
 ```
 

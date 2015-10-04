@@ -57,9 +57,11 @@ void run() {
     // draw (only if the frame rate demands it)
     if (millis() - last_draw_millis > FRAME_DURATION) {
       drawing_loop();
+      misc_loop_start();
       SDL_SetRenderDrawColor(renderer, background_r, background_g, background_b, 0xFF);
       SDL_RenderClear(renderer);
       draw();
+      misc_loop_end();
       SDL_RenderPresent(renderer);
       last_draw_millis = millis();
       frame_no++;
