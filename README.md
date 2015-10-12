@@ -33,7 +33,7 @@ sudo git clone https://github.com/motine/sta.git /usr/local/sta.git
 # => git clone /usr/local/sta.git myproject
 ```
 
-If you want to update a the local repository or an existing project you can run `git pull` in the respective folder.
+If you want to update the local repository or an existing project you can run `git pull` in the respective folder.
 
 ## Get started
 
@@ -271,9 +271,10 @@ void draw() {
 
 ![](sta/imgs/mouse.png)
 
-For the sake of simplicity, there is no event listeners or event polling.
-Yet, there are functions to ask for the current mouse position and check which key is currently pressed.
-_Limitation: We can only recognizing a single key at any given time._
+For the sake of simplicity, there is no event listening or event polling.
+Yet, there are functions to ask for the current mouse position.
+Also, you can check which key is currently pressed.
+_Limitation: We can only recognize a single key at any given time._
 
 ```c
 // ...
@@ -354,9 +355,9 @@ To check a number of files, please use `for i in *.c; do echo "------------- $i"
 ## Disclaimer
 
 I am aware that some of the choices I made are quite opinionated.
-Two examples are: I am providing a main function in a module (ugh) and I am using 50 fps and not a decent time difference method.
+Two examples are: I am providing a main function in a module (_ugh_) and I am using fixed [FPS](https://en.wikipedia.org/wiki/Frame_rate) and not a decent time difference method.
 These two choices – and many others – were made because I think they make teaching simpler.
-I guess these simplifications should considered carefully for a real world project.
+I guess these simplifications should be considered carefully for any real world project.
 
 <!--
 TODO add error checking everywhere
