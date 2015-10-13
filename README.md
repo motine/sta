@@ -21,7 +21,7 @@ We – teachers – can focus on explaining the stuff that really counts: proble
 **On Mac**, you can install the prerequisites via [homebrew](http://brew.sh/):  `brew install git sdl2 sdl2_gfx sdl2_ttf`. Please make sure your compiler (llvm/gcc) is up to date.
 
 **On Linux** (Ubuntu), I installed the following packages: `sudo apt-get -y install git build-essential libsdl2-dev libsdl2-gfx-dev libsdl2-ttf-dev`.
-Please make sure your `gcc` version is `>= 4.9`.
+If you have to use Ubuntu 14.04 or earlier, please scroll down and see the troubleshooting section.
 
 Or do it **without a package manager** and follow the instructions on these respective sites: [git](https://git-scm.com/), [SDL 2](https://www.libsdl.org/download-2.0.php) and [SDL GFX](http://cms.ferzkopp.net/index.php/software/13-sdl-gfx).
 
@@ -340,6 +340,18 @@ void draw() {
   pixel(102, 100);
   pixel(104, 100);
 }
+```
+
+# Troubleshooting
+
+We need a `gcc` version `>= 4.9`. This is default for Ubuntu `>=15.04`. 
+
+```bash
+# Only on Ubuntu 14.04
+sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install gcc-4.9
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50
 ```
 
 # Internals
