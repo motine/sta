@@ -75,7 +75,6 @@ void pixel(unsigned int x, unsigned int y) {
 static TTF_Font* standard_font;
 
 void text(unsigned int x, unsigned int y, const char* text) {
-  SDL_Surface* screen = SDL_GetWindowSurface(window);
   SDL_Color color = {stroke_r, stroke_g, stroke_b, 0};
 
   SDL_Surface* surface = TTF_RenderText_Blended(standard_font, text, color);
