@@ -18,10 +18,10 @@ static char debug_lines[DEBUG_MAX_LINES][DEBUG_BUFFER_LENGTH];
 static unsigned int debug_next_line_index;
 
 void debug_clear() {
-  debug_next_line_index = 0;
-  for (unsigned short i=0; i < DEBUG_MAX_LINES; i++) {
+  for (unsigned short i=0; i < debug_next_line_index; i++) { // remove prior debugs
     strcpy(debug_lines[i], "");
   }
+  debug_next_line_index = 0;
 }
 
 void debug_draw() {

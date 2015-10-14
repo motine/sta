@@ -45,17 +45,15 @@ void run() {
   while (!terminated) {
     // process events
     SDL_PollEvent(&event);
-    if (event.type == SDL_QUIT) {
-      break;
-    }
-    if ((event.type == SDL_KEYDOWN) && (event.key.keysym.sym == SDLK_ESCAPE)) {
+    if ((event.type == SDL_QUIT) || ((event.type == SDL_KEYDOWN) && (event.key.keysym.sym == SDLK_ESCAPE))) {
       break;
     }
     if (stopped) {
       continue;
     }
     // draw (only if the frame rate demands it)
-    if (millis() - last_draw_millis > FRAME_DURATION) {
+    if ((millis() - last_draw_millis) >= FRAME_DURATION) {
+      last_draw_millis = millis();
       drawing_loop();
       misc_loop_start();
       SDL_SetRenderDrawColor(renderer, background_r, background_g, background_b, 0xFF);
@@ -63,9 +61,9 @@ void run() {
       draw();
       misc_loop_end();
       SDL_RenderPresent(renderer);
-      last_draw_millis = millis();
       frame_no++;
     }
+    SDL_Delay(1);
   }
   drawing_free();
   SDL_DestroyWindow(window);
