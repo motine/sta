@@ -41,4 +41,7 @@ void add_debug_line(const char *line); // forward declaration needed for debug
     add_debug_line(buffer);                                                    \
   }
 
+// shows the current frame rate (per second) as debug output.
+void show_fps();
+
 #endif

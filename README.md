@@ -166,6 +166,10 @@ unsigned long long millis();
 // Returns the number of the frame which is currently drawn.
 // The result of the first draw method has frame index 0, the next 1, ...
 unsigned long long frame_index();
+
+// shows the current frame rate (per second) as debug output.
+// Please call only once per draw().
+void show_fps();
 ```
 
 **Debugging**

@@ -37,6 +37,13 @@ void add_debug_line(const char* line) {
   } // silently fail if there is too many lines added in one loop
 }
 
+unsigned long long last_draw_millis = 0;
+void show_fps() {
+  unsigned long long now = millis();
+  debug("fps", 1000.0/(now-last_draw_millis));
+  last_draw_millis=now;
+}
+
 // life cycle methods
 void misc_init() {
   srand(time(NULL));
