@@ -42,6 +42,7 @@ void run() {
   printf("Please hit ESC in the main window to exit the program.\n");
   SDL_Event event;
   unsigned long long last_draw_millis = 0;
+  bool battery_saver = false; // if enabled, each loop will end with a delay call
   while (!terminated) {
     // process events
     SDL_PollEvent(&event);
@@ -62,8 +63,12 @@ void run() {
       misc_loop_end();
       SDL_RenderPresent(renderer);
       frame_no++;
+      battery_saver = false;
+    } else {
+      battery_saver = true;
     }
-    SDL_Delay(1);
+    if (battery_saver)
+      SDL_Delay(1);
   }
   drawing_free();
   SDL_DestroyWindow(window);

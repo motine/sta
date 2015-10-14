@@ -346,6 +346,27 @@ void draw() {
 }
 ```
 
+## Performance test
+
+In this little program you can tweak the ITERATIONS constant to check out when your frame rate starts to decline.
+The constant determines how many drawing operations are done per draw cycle.
+
+```c
+#include "sketchbook.h"
+
+void setup() {}
+
+const unsigned ITERATIONS = 500;
+void draw() {
+  show_fps();
+  for (int i=0; i < ITERATIONS; i++) {
+    int x = rand() % 700;
+    int y = rand() % 500;
+    rectangle(x, y, x+100, y+100);
+  }
+}
+```
+
 # Troubleshooting
 
 We need a `gcc` version `>= 4.9`. This is default for Ubuntu `>=15.04`. 
