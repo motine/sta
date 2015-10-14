@@ -42,28 +42,33 @@ void run() {
   printf("Please hit ESC in the main window to exit the program.\n");
   SDL_Event event;
   unsigned long long last_draw_millis = 0;
+  bool battery_saver = false; // if enabled, each loop will end with a delay call
   while (!terminated) {
     // process events
     SDL_PollEvent(&event);
-    if (event.type == SDL_QUIT) {
-      break;
-    }
-    if ((event.type == SDL_KEYDOWN) && (event.key.keysym.sym == SDLK_ESCAPE)) {
+    if ((event.type == SDL_QUIT) || ((event.type == SDL_KEYDOWN) && (event.key.keysym.sym == SDLK_ESCAPE))) {
       break;
     }
     if (stopped) {
       continue;
     }
     // draw (only if the frame rate demands it)
-    if (millis() - last_draw_millis > FRAME_DURATION) {
+    if ((millis() - last_draw_millis) >= FRAME_DURATION) {
+      last_draw_millis = millis();
       drawing_loop();
+      misc_loop_start();
       SDL_SetRenderDrawColor(renderer, background_r, background_g, background_b, 0xFF);
       SDL_RenderClear(renderer);
       draw();
+      misc_loop_end();
       SDL_RenderPresent(renderer);
-      last_draw_millis = millis();
       frame_no++;
+      battery_saver = false;
+    } else {
+      battery_saver = true;
     }
+    if (battery_saver)
+      SDL_Delay(1);
   }
   drawing_free();
   SDL_DestroyWindow(window);
