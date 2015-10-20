@@ -151,10 +151,11 @@ unsigned int mouse_y();
 // Returns true if the left mouse button is pressed.
 bool mouse_pressed();
 
-// Returns true if the given key is pressed.
-// Valid keys are found in the "SDL_Scancode Value" column of this table: https://wiki.libsdl.org/SDL_Scancode
-// Be aware: The ESC key is handled by the framework itself and will quit the application.
-bool key_pressed(unsigned short key);
+// Returns the character which is currently pressed on the keyboard.
+// We can only recognize lowercase alphabetic letters and numbers ('a', 'b', 'c', ..., 'z', '0', '1', ..., '9').
+// Key modifiers are not considered (shift, ctrl, alt, etc.).
+// If none is pressed, this function returns 0.
+char key_pressed();
 ```
 
 **Timeline**
@@ -277,9 +278,9 @@ void draw() {
 ![](sta/imgs/mouse.png)
 
 For the sake of simplicity, there is no event listening or event polling.
-Yet, there are functions to ask for the current mouse position.
+Yet, there are functions to ask for the current mouse coordinates.
 Also, you can check which key is currently pressed.
-_Limitation: We can only recognize a single key at any given time._
+_Limitation: We can only recognize lowercase alphabetic letters and numbers. Key modifiers are also not considered (e.g. shift, ctrl, alt)._
 
 ```c
 // ...
@@ -300,8 +301,7 @@ void draw() {
   } else {
     stroke(200, 200, 200);
   }
-  
-  if (key_pressed(SDL_SCANCODE_RETURN)) { // checks if the enter key is pressed
+  if (key_pressed() == 'a') { // checks if the A key is pressed
     fill(255, 0, 0);
   } else {
     fill(255, 255, 255);
