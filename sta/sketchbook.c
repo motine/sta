@@ -45,9 +45,10 @@ void run() {
   bool battery_saver = false; // if enabled, each loop will end with a delay call
   while (!terminated) {
     // process events
-    SDL_PollEvent(&event);
-    if ((event.type == SDL_QUIT) || ((event.type == SDL_KEYDOWN) && (event.key.keysym.sym == SDLK_ESCAPE))) {
-      break;
+    if (SDL_PollEvent(&event)) { // it may be that there is no event
+      if ((event.type == SDL_QUIT) || ((event.type == SDL_KEYDOWN) && (event.key.keysym.sym == SDLK_ESCAPE))) {
+        break;
+      }
     }
     if (stopped) {
       continue;
