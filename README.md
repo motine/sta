@@ -197,6 +197,7 @@ MAX(X, Y);
 
 // Returns a pseudo-random number between ​0​ and the highest positive number of int.
 int rand(); // You don't need to worry about calling srand(). Sketchbook does it automatically for you.
+// Hint: Use something like `x = rand() % 100` to get numbers beween 0 and 99.
 
 // Sketchbook includes the `math.h` library. Please see the API here: http://devdocs.io/c/numeric/math
 double fabs(double x); // All sorts of trigonometric functions
