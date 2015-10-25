@@ -60,10 +60,10 @@ void draw() {
     if ((ball_x >= paddle_x) && (ball_x <= (paddle_x + PADDLE_WIDTH))) {  // the paddle was hit
       // simple version: ball_vy = -ball_vy;
       // complicated version: adjust the ball velocity depending on where the paddle was hit
-      float paddle_hit_x =
-          (ball_x - PADDLE_WIDTH / 2 - paddle_x) / (float)PADDLE_WIDTH;  // calculate where the paddle was hit: -0.5 means on most left, 0.0 right in the middle, and 0.5 on the right edge
+      float paddle_hit_x = (ball_x - PADDLE_WIDTH / 2 - paddle_x) / (float)PADDLE_WIDTH;  // calculate where the paddle was hit: -0.5 means on most left, 0.0 right in the middle, and 0.5 on the right edge
       // calculate the angle of the ball
       float total_velocity = sqrt(ball_vx * ball_vx + ball_vy * ball_vy);
+      // Possible simplification: we do not need to consider the prior trajectory of the ball, we just let it bounce according to where it hit the paddle.
       float v_angle = acos(ball_vx / total_velocity);  // cos(a) = paddle_vx / total_velocity;
       // v_angle == PI/2 means straigt up, PI or 0 means horizontal velocity
       v_angle = v_angle + -fabs(M_PI_2 - (v_angle - M_PI_2)) * paddle_hit_x;  // adjust the angle depending on where the paddle was hit
