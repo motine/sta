@@ -1,7 +1,7 @@
 # Find the meaning of the variables here: http://www.gnu.org/software/make/manual/make.html#Writing-Recipes-with-Directory-Search
 CC=gcc
 CFLAGS=-Ista -fdiagnostics-color=always -Wall -std=c11 $(shell sdl2-config --cflags)
-LIBS=-lSDL2_gfx -lSDL2_ttf $(shell sdl2-config --libs)
+LIBS=-lm -lSDL2_gfx -lSDL2_ttf $(shell sdl2-config --libs)
 
 all: project
 
