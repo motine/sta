@@ -141,7 +141,7 @@ void text(unsigned int x, unsigned int y, const char* text);
 void background(unsigned short r, unsigned short g, unsigned short b);
 ```
   
-**Input**
+**Input & Output**
   
 ```c
 // Returns the current x mouse coordinate.
@@ -156,6 +156,10 @@ bool mouse_pressed();
 // Key modifiers are not considered (shift, ctrl, alt, etc.).
 // If none is pressed, this function returns 0.
 char key_pressed();
+
+// If called, screenshots will be written to `shots/00001.bmp`, `shots/00002.bmp`, ... .
+// Usually called during `setup()`.
+void enable_shots();
 ```
 
 **Timeline**
@@ -381,6 +385,13 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50
 ```
 
 # Internals
+
+**Exporting screenshots**
+I usally make animated GIFs from program submissions.
+You can can call `enable_shots()` during `setup()`.
+Then the following frames will be exported to the `shots` folder.
+After this, you can call `./make_gif.sh` and voila: there is a file `shots.gif`.
+Since those files are usually quite large I use [GIF Brewery](http://gifbrewery.com/) to edit them.
 
 **Vagrant**
 For testing the environment of the students I am using a vagrant machine.

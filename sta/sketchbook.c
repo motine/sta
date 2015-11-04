@@ -9,6 +9,7 @@ static unsigned long long frame_no = 0;  // number of frames since the program s
 static uint8_t background_r = 0xCC, background_g = 0xCC, background_b = 0xCC;
 static bool terminated = false;
 static bool stopped = false;
+static bool shall_export_shots = false;
 
 void stop() {
   stopped = true;
@@ -26,6 +27,21 @@ void background(uint8_t r, uint8_t g, uint8_t b) {
   background_r = r;
   background_g = g;
   background_b = b;
+}
+
+void enable_shots() {
+  shall_export_shots = true;
+}
+
+void export_shot() {
+  char filename[100];
+  sprintf(filename, "shots/%05llu.bmp", frame_no);
+  int w, h;
+  SDL_GetWindowSize(window, &w, &h);
+  SDL_Surface *sshot = SDL_CreateRGBSurface(0, w, h, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+  SDL_RenderReadPixels(renderer, NULL, SDL_PIXELFORMAT_ARGB8888, sshot->pixels, sshot->pitch);
+  SDL_SaveBMP(sshot, filename);
+  SDL_FreeSurface(sshot);
 }
 
 void init() {
@@ -62,7 +78,10 @@ void run() {
       SDL_RenderClear(renderer);
       draw();
       misc_loop_end();
+      if (shall_export_shots) // export image
+        export_shot();
       SDL_RenderPresent(renderer);
+      // export
       frame_no++;
       battery_saver = false;
     } else {
