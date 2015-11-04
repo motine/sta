@@ -389,8 +389,8 @@ I usally create animated GIFs from program submissions.
 You can can call the executable with the `-s` switch (e.g. `./project -s`).
 Then the all frames will be exported to the `shots` folder.
 
-You can also use `make shots`.
-This will run the project with `-s`. You can terminate the program when you have enough material.
+You can also use `make shots`. Though, you need [ImageMagick](http://www.imagemagick.org/script/index.php) installed (under Ubuntu run: `sudo apt-get install imagemagick`).
+The `make` command will run the project with `-s`. You can terminate the program when you have enough material.
 Then make will create an animated GIF and leave it under `shots.gif`.
 Since those files are usually quite large I use [GIF Brewery](http://gifbrewery.com/) to edit them.
 
