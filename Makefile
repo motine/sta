@@ -15,3 +15,10 @@ project: project.o sta/drawing.o sta/input.o sta/misc.o sta/sketchbook.o
 .PHONY: clean
 clean:
 	rm -f *.o sta/*.o $(PROJECT)
+	
+.PHONY: shots
+shots: project
+	rm -f shots/*.bmp
+	./project -s
+	./make_gif.sh
+	rm -f shots/*.bmp

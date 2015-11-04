@@ -29,10 +29,6 @@ void background(uint8_t r, uint8_t g, uint8_t b) {
   background_b = b;
 }
 
-void enable_shots() {
-  shall_export_shots = true;
-}
-
 void export_shot() {
   char filename[100];
   sprintf(filename, "shots/%05llu.bmp", frame_no);
@@ -95,7 +91,12 @@ void run() {
   SDL_Quit();
 }
 
-int main() {
+int main(int argc, char **argv) {
+  if (argc > 1) {
+    if (strcmp("-s", argv[1]) == 0) {
+      shall_export_shots = true;
+    }
+  }
   init();
   run();
   return 0;

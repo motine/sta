@@ -29,10 +29,6 @@ unsigned long long frame_index();
 // Set the background color through RGB values from 0..255. It is used to clear the screen before each `draw()` call.
 void background(uint8_t r, uint8_t g, uint8_t b);
 
-// If called, screenshots will be written to `shots/00001.bmp`, `shots/00002.bmp`, ... .
-// Usually called during setup();
-void enable_shots();
-
 // --- internals
 #define WIDTH 800
 #define HEIGHT 600

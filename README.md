@@ -157,9 +157,7 @@ bool mouse_pressed();
 // If none is pressed, this function returns 0.
 char key_pressed();
 
-// If called, screenshots will be written to `shots/00001.bmp`, `shots/00002.bmp`, ... .
-// Usually called during `setup()`.
-void enable_shots();
+// Please see "Internals" section for enabling screenshot output.
 ```
 
 **Timeline**
@@ -387,10 +385,13 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50
 # Internals
 
 **Exporting screenshots**
-I usally make animated GIFs from program submissions.
-You can can call `enable_shots()` during `setup()`.
-Then the following frames will be exported to the `shots` folder.
-After this, you can call `./make_gif.sh` and voila: there is a file `shots.gif`.
+I usally create animated GIFs from program submissions.
+You can can call the executable with the `-s` switch (e.g. `./project -s`).
+Then the all frames will be exported to the `shots` folder.
+
+You can also use `make shots`.
+This will run the project with `-s`. You can terminate the program when you have enough material.
+Then make will create an animated GIF and leave it under `shots.gif`.
 Since those files are usually quite large I use [GIF Brewery](http://gifbrewery.com/) to edit them.
 
 **Vagrant**
