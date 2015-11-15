@@ -20,5 +20,7 @@ clean:
 shots: project
 	rm -f shots/*.bmp
 	./project -s
-	./make_gif.sh
+	echo "combining shots (this can take a while)..."
+	convert -delay 4 -loop 0 shots/*.bmp shots.gif # this needs image magick installed
+	echo "result written to shots.gif"
 	rm -f shots/*.bmp
