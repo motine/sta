@@ -372,7 +372,14 @@ void draw() {
 
 # Troubleshooting
 
-We need a `gcc` version `>= 4.9`. This is default for Ubuntu `>=15.04`. 
+We need a `gcc` version `>= 4.9` for using generics. Maybe you got this error:
+
+```
+gcc: error: unrecognized command line option ‘-fdiagnostics-color=always’
+make: *** [project.o] Error 1
+```
+
+`gcc >= 4.9` is the default for Ubuntu `>=15.04`. 
 
 ```bash
 # Only on Ubuntu 14.04
