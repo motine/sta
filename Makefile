@@ -14,7 +14,8 @@ project: project.o sta/drawing.o sta/input.o sta/misc.o sta/sketchbook.o
 .SILENT:
 .PHONY: clean
 clean:
-	rm -f *.o sta/*.o $(PROJECT)
+	rm -f *.o sta/*.o project
+	rm -f shots/*.bmp
 	
 .PHONY: shots
 shots: project
