@@ -29,6 +29,9 @@ void add_debug_line(const char *line); // forward declaration needed for debug
     char format[10] = "%s: ";                                                  \
     strcat(format, _Generic((VALUE), int : "%i",                               \
                             unsigned int : "%u",                               \
+                                    char : "%c",                               \
+                           unsigned char : "%c",                               \
+                     char[sizeof(VALUE)] : "%s",                               \
                                    float : "%f",                               \
                                   double : "%lf",                              \
                                    short : "%hi",                              \
@@ -36,7 +39,8 @@ void add_debug_line(const char *line); // forward declaration needed for debug
                                     long : "%li",                              \
                            unsigned long : "%lu",                              \
                                long long : "%lli",                             \
-                      unsigned long long : "%llu"));                           \
+                      unsigned long long : "%llu",                             \
+                                 default : "%p"));                             \
     sprintf(buffer, format, PREFIX, VALUE);                                    \
     add_debug_line(buffer);                                                    \
   }

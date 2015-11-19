@@ -182,7 +182,8 @@ void show_fps();
 // Right before the draw function is called, the overlay will be cleared.
 // This means this method can be called multiple times during draw, but only the inspections added in the last draw will be shown.
 // The overlay will be drawn after the draw method ran.
-void debug(const char* prefix, TYPE value); // where TYPE can be any form of number
+void debug(const char* prefix, TYPE value); // where TYPE can be any number or a string
+// If the type is not recognized the value printed as pointer.
 ```
 
 **Useful stuff from other libraries**
