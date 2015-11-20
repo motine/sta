@@ -315,6 +315,26 @@ void draw() {
 }
 ```
 
+When using `key_pressed()` for text input, you may encounter that it will always –not just once– return the key currently pressed.
+Sometimes this is not desirable, because you may want to handle a key press only once.
+Here a little trick how to achive the "once-only" behaviour:
+
+```c
+char input[100] = "";
+char last_key = 0;
+
+void draw() {
+  char key = key_pressed();
+  if (key && (last_key != key)) { // this is only true once per key press
+    int last_char = strlen(input);
+    input[last_char] = key; // add the key to the input
+    input[last_char+1] = '\0'; // let's not forget zero-termination of strings
+  }
+  last_key = key; // save the current key, so we can check if it differs in the next draw call
+
+  text(10, 10, input);
+}
+```
 
 ### Coloring
 
