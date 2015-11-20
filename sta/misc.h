@@ -25,9 +25,9 @@ void add_debug_line(const char *line); // forward declaration needed for debug
 // The overlay will be drawn after the draw method ran.
 #define debug(PREFIX, VALUE)                                                   \
   {                                                                            \
-    char buffer[DEBUG_BUFFER_LENGTH];                                          \
-    char format[10] = "%s: ";                                                  \
-    strcat(format, _Generic((VALUE), int : "%i",                               \
+    char _buffer[DEBUG_BUFFER_LENGTH];                                         \
+    char _format[10] = "%s: ";                                                 \
+    strcat(_format, _Generic((VALUE), int : "%i",                              \
                             unsigned int : "%u",                               \
                                     char : "%c",                               \
                            unsigned char : "%c",                               \
@@ -41,8 +41,8 @@ void add_debug_line(const char *line); // forward declaration needed for debug
                                long long : "%lli",                             \
                       unsigned long long : "%llu",                             \
                                  default : "%p"));                             \
-    sprintf(buffer, format, PREFIX, VALUE);                                    \
-    add_debug_line(buffer);                                                    \
+    sprintf(_buffer, _format, PREFIX, VALUE);                                  \
+    add_debug_line(_buffer);                                                   \
   }
 
 // shows the current frame rate (per second) as debug output.
