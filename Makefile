@@ -8,7 +8,7 @@ all: project
 %.o: %.c %.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-project: project.o sta/drawing.o sta/input.o sta/misc.o sta/sketchbook.o
+project: project.o sta/drawing.o sta/input.o sta/misc.o sta/sketchbook.o sta/robot.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .SILENT:
