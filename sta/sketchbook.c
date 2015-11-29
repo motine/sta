@@ -70,8 +70,8 @@ void run() {
     if (stopped) {
       continue;
     }
-    // draw (only if the frame rate demands it)
-    if ((millis() - last_draw_millis) >= frame_duration) {
+    // draw (only if the frame rate demands it; force draw in for the very first frame)
+    if ((last_draw_millis == 0) || ((millis() - last_draw_millis) >= frame_duration)) {
       last_draw_millis = millis();
       drawing_loop();
       misc_loop_start();
@@ -81,8 +81,7 @@ void run() {
       misc_loop_end();
       if (shall_export_shots) // export image
         export_shot();
-      SDL_RenderPresent(renderer);
-      // export
+      SDL_RenderPresent(renderer); // flip buffer
       frame_no++;
       battery_saver = false;
     } else {
