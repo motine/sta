@@ -99,7 +99,8 @@ void setup(); // !! This method must be provided by the student (in the `project
 // Right before the screen is emptied, right after all the drawing is put on the screen. 
 void draw(); // !! This method must be provided by the student (in the `project.c` file)
 
-// Change the intended frame rate. Don't use values higher than 25.0 unless you are sure your computer(s) are fast enough.
+// Change the intended frame rate. Usually used in the setup() function.
+// Don't use values higher than 25.0 unless you are sure your computer(s) are fast enough.
 void fps(float target_frames_per_sec);
 // Stop the calls to `draw`. The result of the current `draw` will be kept on the screen forever.
 void stop();
