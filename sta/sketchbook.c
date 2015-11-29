@@ -10,6 +10,11 @@ static uint8_t background_r = 0xCC, background_g = 0xCC, background_b = 0xCC;
 static bool terminated = false;
 static bool stopped = false;
 static bool shall_export_shots = false;
+static unsigned int frame_duration = 40; // ms, determines the frame rate (1000/frame rate). If set it to 20 ms we have 50 fps (1000ms / 50frames = 20ms/frame).
+
+void fps(float target_frames_per_sec) {
+  frame_duration = 1000/target_frames_per_sec;
+}
 
 void stop() {
   stopped = true;
@@ -66,7 +71,7 @@ void run() {
       continue;
     }
     // draw (only if the frame rate demands it)
-    if ((millis() - last_draw_millis) >= FRAME_DURATION) {
+    if ((millis() - last_draw_millis) >= frame_duration) {
       last_draw_millis = millis();
       drawing_loop();
       misc_loop_start();

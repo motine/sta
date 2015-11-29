@@ -17,6 +17,8 @@ void setup(); // !! This method must be provided by the student (in the `project
 // Right before the screen is emtied, right after all the drawing is put on the screen. 
 void draw(); // !! This method must be provided by the student (in the `project.c` file)
 
+// Change the intended frame rate. Don't use values higher than 25 unless you are sure all computers are fast enough.
+void fps(float target_frames_per_sec);
 // Stop the calls to `draw`. The result of the current `draw` will be kept on the screen forever.
 void stop();
 // Terminate the application after the current `draw`.
@@ -32,7 +34,6 @@ void background(uint8_t r, uint8_t g, uint8_t b);
 // --- internals
 #define WIDTH 800
 #define HEIGHT 600
-#define FRAME_DURATION 40 // ms, determines the frame rate (1000/frame rate). If set it to 20 ms we have 50 fps (1000ms / 50frames = 20ms/frame).
 
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
