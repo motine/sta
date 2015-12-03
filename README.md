@@ -141,6 +141,7 @@ void pixel(unsigned int x, unsigned int y);
 void text(unsigned int x, unsigned int y, const char* text);
 
 // Set the background color through RGB values from 0..255. It is used to clear the screen before each `draw()` call.
+// Usually, you would use this call within the `setup()` function.
 void background(unsigned short r, unsigned short g, unsigned short b);
 ```
   
