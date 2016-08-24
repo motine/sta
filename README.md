@@ -124,6 +124,9 @@ void stroke(unsigned short r, unsigned short g, unsigned short b);
 // Disable stroking future shapes.
 void no_stroke();
 
+// Configure if the screen should be cleared before each call to draw (true by default)
+void clear_before_drawing(bool clear);
+
 // Draws a line from (x1, y1) to (x2, y2) with the stroke color.
 void line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2);
 // Draws a triangle from (x1, y1) to (x2, y2) to (x3, y3)

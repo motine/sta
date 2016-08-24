@@ -7,6 +7,8 @@
 #include "input.h"
 #include "misc.h"
 
+void clear_before_drawing(bool clear);
+
 // The sketchbook brings up the main window and provides the main functions.
 // It will will expects a `void setup()` and a `void draw()` function to be defined somewhere else (in the student's program).
 
