@@ -16,6 +16,8 @@ void stroke(uint8_t r, uint8_t g, uint8_t b);
 // Disable stroking future shapes.
 void no_stroke();
 
+// Draws a triangle from (x1, y1) to (x2, y2) to (x3, y3)
+void triangle(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int x3, unsigned int y3);
 // Draws a line from (x1, y1) to (x2, y2) with the stroke color.
 void line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2);
 // Draws a rectangle from (x1, y1) to (x2, y2).

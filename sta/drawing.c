@@ -43,6 +43,12 @@ void no_stroke() {
 }
 
 // -- actual drawing
+
+void triangle(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int x3, unsigned int y3) {
+  aatrigonRGBA(renderer, x1, y1, x2, y2, x3, y3, stroke_r, stroke_g, stroke_b, stroke_a);
+  filledTrigonRGBA(renderer, x1, y1, x2, y2, x3, y3, fill_r, fill_g, fill_b, fill_a);
+}
+
 void line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2) {
   aalineRGBA(renderer, x1, y1, x2, y2, stroke_r, stroke_g, stroke_b, stroke_a);
 }
