@@ -13,10 +13,6 @@ static bool shall_export_shots = false;
 static unsigned int frame_duration = 40; // ms, determines the frame rate (1000/frame rate). If set it to 20 ms we have 50 fps (1000ms / 50frames = 20ms/frame).
 static bool should_clear = true;
 
-void clear_before_drawing(bool clear) {
-    should_clear = clear;
-}
-
 void fps(float target_frames_per_sec) {
   frame_duration = 1000/target_frames_per_sec;
 }
@@ -29,6 +25,10 @@ void quit() {
   terminated = true;
 }
 
+void no_background() {
+  should_clear = false;
+}
+
 unsigned long long frame_index() {
   return frame_no;
 }
@@ -37,6 +37,7 @@ void background(uint8_t r, uint8_t g, uint8_t b) {
   background_r = r;
   background_g = g;
   background_b = b;
+  should_clear = true;
 }
 
 void export_shot() {
