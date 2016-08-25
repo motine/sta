@@ -30,9 +30,10 @@ apt-get -y install vim man wget
 SCRIPT
 
 DESKTOP = <<SCRIPT
-apt-get -y install xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+apt-get -y install xfce4
+# apt-get -y install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 # apt-get -y install ubuntu-gnome-desktop gnome-shell
-apt-get -y install libsdl2 libsdl2-dev libsdl2-gfx-dev
+apt-get -y install git build-essential libsdl2-dev libsdl2-gfx-dev libsdl2-ttf-dev
 SCRIPT
 
 Vagrant.configure("2") do |config|
