@@ -126,6 +126,8 @@ void no_stroke();
 
 // Draws a line from (x1, y1) to (x2, y2) with the stroke color.
 void line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2);
+// Draws a triangle from (x1, y1) to (x2, y2) to (x3, y3)
+void triangle(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int x3, unsigned int y3);
 // Draws a rectangle from (x1, y1) to (x2, y2).
 void rectangle(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2);
 // Draws an ellipse around (x, y) with the radius of rx and ry.
@@ -143,6 +145,11 @@ void text(unsigned int x, unsigned int y, const char* text);
 // Set the background color through RGB values from 0..255. It is used to clear the screen before each `draw()` call.
 // Usually, you would use this call within the `setup()` function.
 void background(unsigned short r, unsigned short g, unsigned short b);
+
+// Usually the screen is filled with the background before each call to draw. Disable it with this method.
+// Careful: sketchbook may use double buffering. The draw method draws on alternating canvases.
+// Find more info via: https://en.wikipedia.org/wiki/Multiple_buffering#Double_buffering_in_computer_graphics
+void no_background();
 ```
   
 **Input & Output**

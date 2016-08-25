@@ -11,6 +11,7 @@ static bool terminated = false;
 static bool stopped = false;
 static bool shall_export_shots = false;
 static unsigned int frame_duration = 40; // ms, determines the frame rate (1000/frame rate). If set it to 20 ms we have 50 fps (1000ms / 50frames = 20ms/frame).
+static bool should_clear = true;
 
 void fps(float target_frames_per_sec) {
   frame_duration = 1000/target_frames_per_sec;
@@ -24,6 +25,10 @@ void quit() {
   terminated = true;
 }
 
+void no_background() {
+  should_clear = false;
+}
+
 unsigned long long frame_index() {
   return frame_no;
 }
@@ -32,6 +37,7 @@ void background(uint8_t r, uint8_t g, uint8_t b) {
   background_r = r;
   background_g = g;
   background_b = b;
+  should_clear = true;
 }
 
 void export_shot() {
@@ -54,12 +60,18 @@ void init() {
   setup();
 }
 
+void draw_background() {
+  SDL_SetRenderDrawColor(renderer, background_r, background_g, background_b, 0xFF);
+  SDL_RenderClear(renderer);
+}
+
 // start the main loop and handle ESC
 void run() {
   printf("Please hit ESC in the main window to exit the program.\n");
   SDL_Event event;
   unsigned long long last_draw_millis = 0;
   bool battery_saver = false; // if enabled, each loop will end with a delay call
+  if (!should_clear) draw_background();
   while (!terminated) {
     // process events
     if (SDL_PollEvent(&event)) { // it may be that there is no event
@@ -75,8 +87,7 @@ void run() {
       last_draw_millis = millis();
       drawing_loop();
       misc_loop_start();
-      SDL_SetRenderDrawColor(renderer, background_r, background_g, background_b, 0xFF);
-      SDL_RenderClear(renderer);
+      if (should_clear) draw_background();
       draw();
       misc_loop_end();
       if (shall_export_shots) // export image

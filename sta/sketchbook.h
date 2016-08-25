@@ -31,6 +31,9 @@ unsigned long long frame_index();
 // Set the background color through RGB values from 0..255. It is used to clear the screen before each `draw()` call.
 void background(uint8_t r, uint8_t g, uint8_t b);
 
+// Usually the screen is filled with the background before each call to draw. Disable it with this method.
+void no_background();
+
 // --- internals
 #define WIDTH 800
 #define HEIGHT 600
