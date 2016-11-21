@@ -19,9 +19,17 @@ clean:
 	
 .PHONY: shots
 shots: project
+	gifsicle --version || ( echo "Please install gifsicle" && exit 1 )
 	rm -f shots/*.bmp
 	./project -s
 	echo "combining shots (this can take a while)..."
-	convert -delay 4 -loop 0 shots/*.bmp shots.gif # this needs image magick installed
+	convert -delay 4 -loop 0 shots/*.bmp combined.gif # this needs image magick installed
+	gifsicle -O3 --resize 400x300 --optimize=80 -o shots.gif combined.gif
+	rm -f combined.gif
+	# -- Optimization via ImageMagick (worse than gifsicle)
+	# convert combined.gif -coalesce shots_tmp2.gif
+	# convert -size 800x600 shots_tmp2.gif -resize 400x300 shots_tmp3.gif
+	# convert shots_tmp3.gif +matte +map -layers optimize shots.gif
+	# rm shots_tmp1.gif shots_tmp2.gif shots_tmp3.gif
 	echo "result written to shots.gif"
 	rm -f shots/*.bmp
